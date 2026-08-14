@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#FDFBF8">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Maren — A matchmaker, not an app.</title>
+<meta name="description" content="Maren gets to know you first, then introduces you to someone worth your time.">
+<meta property="og:title" content="Maren — A matchmaker, not an app.">
+<meta property="og:description" content="What if you didn't have to search for the right person?">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://yeayejlzcrykgfmnigxy.supabase.co">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* Stats start hidden and are revealed only once the DB has a real number
+   behind them, so nothing false ever paints. Needs !important because the
+   elements below set an explicit display. */
+[hidden]{display:none !important}
+
+:root{
+  --cream:#FDFBF8;--night:#14100D;--ember:#C4703F;
+  --warm:#6B635A;--muted:#B5AEA4;--surface:#F3EEE8;
+  --border:#E5DFD7;--white:#FFFFFF;--green:#3D7A4A;
+  --ember-soft:rgba(196,112,63,0.08);
+}
+
+html{
+  font-size:16px;-webkit-font-smoothing:antialiased;
+  background:#FDFBF8 !important;color-scheme:light only;
+}
+body{
+  background:#FDFBF8 !important;color:#14100D;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  line-height:1.6;overflow-x:hidden;min-height:100vh;
+}
+
+/* ── Wordmark ── */
+.topbar{padding:1.75rem 1.5rem 0;text-align:center}
+.wordmark{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;
+  font-weight:400;font-size:1.125rem;color:var(--night);
+}
+
+/* ── Orb ── */
+.orb-w{width:56px;height:56px;margin:0 auto 1.25rem;position:relative}
+.orb-g{
+  position:absolute;inset:-50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,112,63,0.06) 0%,transparent 70%);
+  animation:pulse 7s ease-in-out infinite;
+}
+.orb-c{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 44% 40%,
+    rgba(196,112,63,0.1) 0%,rgba(196,112,63,0.22) 40%,
+    rgba(196,112,63,0.05) 70%,transparent 100%);
+  animation:pulse 7s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:0.8}
+  50%{transform:scale(1.12);opacity:1}
+}
+
+/* ── Hero ── */
+.hero{max-width:540px;margin:0 auto;padding:2rem 1.5rem 1rem;text-align:center}
+.hero-h{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;
+  font-size:clamp(1.55rem,5vw,2.3rem);line-height:1.25;
+  letter-spacing:-0.015em;color:var(--night);margin-bottom:0.75rem;
+}
+.hero-p{
+  font-size:1rem;font-weight:300;color:var(--warm);
+  max-width:380px;margin:0 auto 1.75rem;line-height:1.6;
+}
+
+/* ── Multi-step form ── */
+.form-wrap{max-width:420px;margin:0 auto;text-align:center}
+
+.step{display:none}
+.step.active{display:block}
+
+/* Step transition */
+.step-enter{animation:stepIn 0.35s ease forwards}
+@keyframes stepIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+/* Progress dots */
+.step-progress{
+  display:flex;gap:6px;justify-content:center;margin-bottom:1.25rem;
+}
+.sp-dot{
+  width:24px;height:3px;border-radius:100px;background:var(--border);
+  transition:background 0.4s,width 0.4s;
+}
+.sp-dot.done{background:var(--ember)}
+.sp-dot.current{background:var(--ember);width:36px}
+
+.input-row{
+  display:flex;border-radius:10px;overflow:hidden;
+  border:1.5px solid var(--border);background:var(--white);
+  transition:border-color 0.25s;
+}
+.input-row:focus-within{border-color:rgba(196,112,63,0.45)}
+
+.em-in{
+  flex:1;padding:0.875rem 1rem;background:transparent;border:none;outline:none;
+  min-width:0;font-family:inherit;font-size:0.9375rem;font-weight:400;color:var(--night);
+}
+.em-in::placeholder{color:var(--muted);font-weight:300}
+
+.field-row{
+  margin-top:0.5rem;border-radius:10px;overflow:hidden;
+  border:1.5px solid var(--border);background:var(--white);
+  transition:border-color 0.25s;
+}
+.field-row:focus-within{border-color:rgba(196,112,63,0.45)}
+.field-in{
+  width:100%;padding:0.75rem 1rem;background:transparent;border:none;outline:none;
+  font-family:inherit;font-size:0.875rem;font-weight:400;color:var(--night);
+}
+.field-in::placeholder{color:var(--muted);font-weight:300}
+
+.next-btn{
+  width:100%;margin-top:0.75rem;
+  padding:0.9375rem 1.375rem;background:var(--night);border:none;
+  cursor:pointer;border-radius:10px;
+  font-family:inherit;font-size:0.9375rem;font-weight:500;
+  color:var(--cream);transition:background 0.2s;
+}
+.next-btn:hover{background:#2A2420}
+.next-btn:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
+.next-btn:disabled{opacity:0.4;cursor:not-allowed}
+
+.inline-btn{
+  display:flex;border-radius:10px;overflow:hidden;
+  border:1.5px solid var(--border);background:var(--white);
+  transition:border-color 0.25s;
+}
+.inline-btn:focus-within{border-color:rgba(196,112,63,0.45)}
+.inline-btn .join-btn{
+  padding:0.875rem 1.375rem;background:var(--night);border:none;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  font-family:inherit;font-size:0.875rem;font-weight:500;
+  color:var(--cream);transition:background 0.2s;
+}
+.inline-btn .join-btn:hover{background:#2A2420}
+.inline-btn .join-btn:disabled{opacity:0.4;cursor:not-allowed}
+
+.form-msg{font-size:0.8125rem;min-height:1.125rem;margin-top:0.5rem;color:transparent}
+.form-msg.err{color:#B8453A}
+
+/* Step 2 — qualifying question */
+.step-label{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;
+  font-size:1.125rem;color:var(--night);margin-bottom:0.25rem;line-height:1.4;
+  text-align:left;
+}
+.step-sub{
+  font-size:0.8125rem;font-weight:300;color:var(--muted);margin-bottom:1rem;
+  text-align:left;line-height:1.5;
+}
+.q-chips{
+  display:flex;flex-wrap:wrap;gap:0.375rem;margin-bottom:0.75rem;
+}
+.q-chip{
+  padding:0.5rem 0.875rem;background:var(--surface);border:1.5px solid var(--border);
+  border-radius:100px;cursor:pointer;font-family:inherit;font-size:0.8125rem;
+  font-weight:400;color:var(--warm);transition:all 0.2s;
+}
+.q-chip:hover{border-color:rgba(196,112,63,0.35);color:var(--night)}
+.q-chip.selected{
+  background:var(--ember-soft);border-color:var(--ember);color:var(--night);
+}
+.q-custom{
+  width:100%;padding:0.75rem 0.875rem;
+  background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+  resize:none;outline:none;font-family:inherit;font-size:0.8125rem;
+  font-weight:300;color:var(--night);line-height:1.5;transition:border-color 0.25s;
+  min-height:52px;
+}
+.q-custom::placeholder{color:var(--muted)}
+.q-custom:focus{border-color:rgba(196,112,63,0.45)}
+
+/* Step 3 — phone + final */
+.phone-row{
+  display:flex;border-radius:10px;overflow:hidden;
+  border:1.5px solid var(--border);background:var(--white);
+  transition:border-color 0.25s;
+}
+.phone-row:focus-within{border-color:rgba(196,112,63,0.45)}
+.phone-flag{
+  padding:0.75rem 0 0.75rem 1rem;font-size:0.9375rem;
+  color:var(--muted);flex-shrink:0;display:flex;align-items:center;
+}
+.phone-in{
+  flex:1;padding:0.75rem 0.75rem;background:transparent;border:none;outline:none;
+  font-family:inherit;font-size:0.9375rem;font-weight:400;color:var(--night);
+  min-width:0;
+}
+.phone-in::placeholder{color:var(--muted);font-weight:300}
+.phone-note{
+  font-size:0.75rem;font-weight:300;color:var(--muted);
+  margin-top:0.375rem;text-align:left;line-height:1.4;
+}
+.skip-phone{
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  font-size:0.8125rem;font-weight:400;color:var(--muted);
+  margin-top:0.5rem;
+}
+.skip-phone:hover{color:var(--warm)}
+
+/* ── Scarcity bar ── */
+.scarcity{margin-top:1rem}
+.scarcity-label{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:0.375rem;
+}
+.scarcity-count{
+  font-family:'Space Mono',monospace;font-size:0.75rem;
+  letter-spacing:0.02em;color:var(--warm);
+}
+.scarcity-count strong{font-weight:400;color:var(--night)}
+.scarcity-cap{font-size:0.6875rem;font-weight:300;color:var(--muted)}
+.bar-track{
+  width:100%;height:6px;background:var(--surface);border-radius:100px;
+  overflow:hidden;position:relative;
+}
+.bar-fill{
+  height:100%;border-radius:100px;
+  background:linear-gradient(90deg,var(--ember),#D4884E);
+  transition:width 1.5s cubic-bezier(0.22,1,0.36,1);position:relative;
+}
+.bar-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:24px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3));
+  border-radius:0 100px 100px 0;
+  animation:bar-shimmer 2.5s ease-in-out infinite;
+}
+@keyframes bar-shimmer{0%,100%{opacity:0.3}50%{opacity:0.8}}
+
+.proof-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:0.625rem;margin-top:0.75rem;flex-wrap:wrap;
+}
+.proof-item{
+  font-family:'Space Mono',monospace;font-size:0.6875rem;
+  letter-spacing:0.04em;color:var(--muted);
+}
+.proof-item strong{font-weight:400;color:var(--warm)}
+.proof-dot{width:3px;height:3px;border-radius:50%;background:var(--border);flex-shrink:0}
+
+.velocity-badge{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  margin-top:0.75rem;padding:0.3rem 0.75rem;
+  background:rgba(61,122,74,0.06);border-radius:100px;
+  font-size:0.6875rem;font-weight:400;color:var(--green);
+}
+.velocity-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--green);
+  animation:v-pulse 2s ease-in-out infinite;
+}
+@keyframes v-pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* ── Post-signup (Step 4) ── */
+.badge{
+  display:inline-block;font-family:'Space Mono',monospace;
+  font-size:0.6875rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--ember);background:var(--ember-soft);
+  padding:0.375rem 0.875rem;border-radius:100px;margin-bottom:1rem;
+}
+.suc-h{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;
+  font-weight:300;font-size:1.5rem;color:var(--night);margin-bottom:0.5rem;
+}
+.suc-p{
+  font-size:0.9375rem;font-weight:300;color:var(--warm);
+  margin-bottom:2rem;line-height:1.6;
+}
+
+.share-box{
+  background:var(--surface);border-radius:12px;padding:1.25rem;
+  max-width:420px;margin:0 auto 1rem;
+}
+.share-label{font-size:0.875rem;font-weight:400;color:var(--night);margin-bottom:0.25rem}
+.share-sub{font-size:0.8125rem;font-weight:300;color:var(--ember);margin-bottom:0.75rem}
+.share-row{display:flex;gap:0.5rem}
+.share-link{
+  flex:1;padding:0.625rem 0.75rem;background:var(--white);
+  border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Space Mono',monospace;font-size:0.6875rem;
+  color:var(--warm);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;outline:none;
+}
+.copy-btn{
+  padding:0.625rem 1rem;background:var(--night);border:none;
+  border-radius:8px;cursor:pointer;font-family:inherit;
+  font-size:0.8125rem;font-weight:500;color:var(--cream);
+  transition:background 0.2s;white-space:nowrap;flex-shrink:0;
+}
+.copy-btn:hover{background:#2A2420}
+.copied{background:var(--green) !important}
+.ref-count{
+  margin-top:0.75rem;font-family:'Space Mono',monospace;
+  font-size:0.6875rem;letter-spacing:0.02em;color:var(--green);
+}
+
+.ref-steps{display:flex;gap:0.5rem;max-width:420px;margin:0 auto 2rem}
+.ref-step{
+  flex:1;background:var(--surface);border-radius:10px;
+  padding:0.875rem 0.75rem;text-align:center;
+}
+.ref-icon{font-size:1.125rem;margin-bottom:0.25rem}
+.ref-step p{font-size:0.6875rem;font-weight:300;color:var(--warm);line-height:1.4}
+.ref-step strong{font-weight:400;color:var(--night);display:block;font-size:0.75rem;margin-bottom:0.125rem}
+
+/* Deep question post-signup */
+.q-box{
+  text-align:left;background:var(--surface);border-radius:12px;
+  padding:1.25rem;max-width:420px;margin:0 auto;
+}
+.q-box-label{font-size:0.9375rem;font-weight:400;color:var(--night);line-height:1.5;margin-bottom:0.2rem}
+.q-box-opt{font-size:0.8125rem;font-weight:300;color:var(--muted);margin-bottom:0.875rem}
+.q-ta{
+  width:100%;min-height:80px;padding:0.75rem 0.875rem;
+  background:var(--white);border:1.5px solid var(--border);border-radius:8px;
+  resize:vertical;outline:none;font-family:inherit;font-size:0.875rem;
+  font-weight:300;color:var(--night);line-height:1.55;transition:border-color 0.25s;
+}
+.q-ta::placeholder{color:var(--muted)}
+.q-ta:focus{border-color:rgba(196,112,63,0.45)}
+.q-acts{display:flex;align-items:center;gap:1rem;margin-top:0.75rem}
+.q-send{
+  padding:0.625rem 1.25rem;background:var(--night);border:none;border-radius:8px;
+  cursor:pointer;font-family:inherit;font-size:0.8125rem;font-weight:500;
+  color:var(--cream);transition:background 0.2s;
+}
+.q-send:hover{background:#2A2420}
+.q-send:disabled{opacity:0.4;cursor:not-allowed}
+.q-skip{
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  font-size:0.8125rem;font-weight:400;color:var(--muted);
+}
+.q-skip:hover{color:var(--warm)}
+.q-thanks{display:none;text-align:center;padding:0.75rem 0}
+.q-thanks.on{display:block}
+.q-form.off{display:none}
+.thx-t{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--warm)}
+
+/* ── Explainer ── */
+.explainer{max-width:500px;margin:0 auto;padding:2.5rem 1.5rem 1rem;text-align:center}
+.explainer-declare{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;
+  font-size:1.25rem;color:var(--night);margin-bottom:1rem;line-height:1.35;
+}
+.explainer-p{
+  font-size:1rem;font-weight:300;color:var(--warm);
+  max-width:420px;margin:0 auto;line-height:1.7;
+}
+.explainer-p strong{font-weight:400;color:var(--night)}
+
+/* ── Sections ── */
+.sec{max-width:500px;margin:0 auto;padding:2.5rem 1.5rem;text-align:center}
+.rule{width:36px;height:1px;background:var(--border);margin:0 auto 2rem}
+.sec-h{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;
+  font-size:1.25rem;color:var(--night);margin-bottom:1.25rem;line-height:1.4;
+}
+.sec-p{
+  font-size:1rem;font-weight:300;color:var(--warm);line-height:1.75;margin-bottom:1rem;
+}
+.sec-p strong{font-weight:400;color:var(--night)}
+
+/* ── Phone Previews ── */
+.peek{max-width:700px;margin:0 auto;padding:1.5rem 0 3rem;text-align:center;overflow:hidden}
+.peek-h{
+  font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;
+  font-size:1.125rem;color:var(--night);margin-bottom:0.375rem;line-height:1.4;padding:0 1.5rem;
+}
+.peek-sub{font-size:0.875rem;font-weight:300;color:var(--muted);margin-bottom:1.75rem;padding:0 1.5rem}
+.phone-track{
+  display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;padding:0.5rem 1.5rem 1.5rem;padding-right:4rem;
+  scrollbar-width:none;
+}
+.phone-track::-webkit-scrollbar{display:none}
+.device{
+  flex:0 0 232px;scroll-snap-align:center;background:#1A1612;border-radius:32px;
+  border:3px solid #2A2420;position:relative;overflow:hidden;
+  box-shadow:0 2px 8px rgba(20,16,13,0.1),0 12px 40px rgba(20,16,13,0.15),inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.island{width:72px;height:18px;margin:10px auto 0;background:#0A0806;border-radius:12px;position:relative;z-index:2}
+.screen{
+  background:#14100D;margin:6px;border-radius:26px;padding:1.75rem 1.125rem 1.5rem;
+  min-height:320px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;
+}
+.ph-orb{width:44px;height:44px;margin:0.25rem auto 1.25rem;border-radius:50%;position:relative}
+.ph-orb-glow{
+  position:absolute;inset:-40%;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,112,63,0.08) 0%,transparent 70%);
+  animation:pulse 7s ease-in-out infinite;
+}
+.ph-orb-core{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 44% 40%,rgba(196,112,63,0.15) 0%,rgba(196,112,63,0.32) 40%,rgba(196,112,63,0.06) 70%,transparent 100%);
+  animation:pulse 7s ease-in-out infinite;
+}
+.ph-title{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1.0625rem;color:#FDFBF8;margin-bottom:0.375rem;line-height:1.35}
+.ph-sub{font-size:0.75rem;font-weight:300;color:#8A8279;line-height:1.5;margin-bottom:1.5rem}
+.ph-bars{width:100%;padding:0 0.25rem}
+.ph-bar{height:9px;border-radius:6px;margin-bottom:0.5rem}
+.b1{background:rgba(196,112,63,0.12);width:80%}
+.b2{background:rgba(255,255,255,0.05);width:65%}
+.b3{background:rgba(255,255,255,0.03);width:50%}
+.b4{background:rgba(255,255,255,0.02);width:35%}
+.ph-label{
+  font-family:'Space Mono',monospace;font-size:0.5625rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(196,112,63,0.6);margin-bottom:1rem;margin-top:0.25rem;
+}
+.ph-insight{font-size:0.8125rem;font-weight:300;color:#E8E2D9;line-height:1.6;margin-bottom:1.25rem;text-align:left;padding:0 0.125rem}
+.ph-insight strong{font-weight:400;color:#FDFBF8}
+.ph-redact{position:relative;overflow:hidden;border-radius:8px;width:100%;padding:0.75rem;background:rgba(255,255,255,0.015)}
+.ph-redact::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,#14100D 75%)}
+.rl{height:7px;border-radius:4px;margin-bottom:0.375rem}
+.rl1{background:rgba(255,255,255,0.06);width:92%}
+.rl2{background:rgba(255,255,255,0.04);width:68%}
+.rl3{background:rgba(255,255,255,0.035);width:78%}
+.rl4{background:rgba(255,255,255,0.025);width:52%}
+.rl5{background:rgba(255,255,255,0.02);width:60%}
+.ph-lock{
+  width:36px;height:36px;margin:1.5rem auto 1.25rem;border:1.5px solid rgba(196,112,63,0.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.ph-lock-icon{width:14px;height:14px;position:relative}
+.ph-lock-icon::before{
+  content:'';position:absolute;top:0;left:2px;width:10px;height:7px;
+  border:1.5px solid rgba(196,112,63,0.35);border-bottom:none;border-radius:6px 6px 0 0;
+}
+.ph-lock-icon::after{content:'';position:absolute;bottom:0;left:0;width:14px;height:9px;background:rgba(196,112,63,0.2);border-radius:2px}
+.ph-more-title{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1rem;color:#FDFBF8;margin-bottom:0.375rem}
+.ph-more-sub{font-size:0.75rem;font-weight:300;color:#8A8279;line-height:1.5;margin-bottom:1.5rem;max-width:160px}
+.ph-more-bars{width:100%;padding:0 0.25rem;opacity:0.4}
+
+.peek-dots{display:flex;gap:6px;justify-content:center;margin-top:1rem}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background 0.3s,width 0.3s}
+.dot.active{background:var(--ember);width:16px;border-radius:3px}
+.peek-caption{
+  margin-top:1.5rem;padding:0 1.5rem;font-size:0.9375rem;font-weight:300;
+  color:var(--warm);line-height:1.55;max-width:400px;margin-left:auto;margin-right:auto;
+}
+.peek-caption strong{font-weight:400;color:var(--night)}
+
+@media(min-width:760px){
+  .phone-track{justify-content:center;overflow:visible;padding:0.5rem 0 1.5rem;padding-right:0}
+  .device{flex:0 0 220px}
+  .screen{min-height:320px;padding:1.5rem 1rem 1.25rem}
+  .peek-dots{display:none}
+}
+
+/* ── Fit section ── */
+.fit-section{max-width:500px;margin:0 auto;padding:1rem 1.5rem 3rem;text-align:center}
+.fit-h{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1.25rem;color:var(--night);margin-bottom:1.5rem;line-height:1.4}
+.fit-card{text-align:left;background:var(--surface);border-radius:12px;padding:1.25rem 1.375rem;margin-bottom:0.75rem}
+.fit-card p{font-size:0.9375rem;font-weight:300;color:var(--warm);line-height:1.65}
+.fit-card p strong{font-weight:400;color:var(--night)}
+.not-card{text-align:left;border-radius:12px;padding:1rem 1.375rem;border:1.5px solid var(--border)}
+.not-card p{font-size:0.875rem;font-weight:300;color:var(--muted);line-height:1.6}
+
+/* ── Founder note ── */
+.founder-note{max-width:420px;margin:0 auto;padding:0 1.5rem 1.5rem;text-align:center}
+.fn-inner{background:var(--surface);border-radius:12px;padding:1.375rem}
+.fn-q{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--night);line-height:1.55;margin-bottom:0.75rem}
+.fn-attr{font-size:0.8125rem;font-weight:300;color:var(--muted)}
+.fn-attr strong{font-weight:400;color:var(--warm)}
+
+/* ── Trust bar ── */
+.trust-bar{
+  max-width:420px;margin:0 auto;padding:0 1.5rem 2.5rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.trust-item{
+  font-family:'Space Mono',monospace;font-size:0.625rem;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:0.375rem;
+}
+.trust-item .t-icon{
+  width:14px;height:14px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.5rem;color:var(--warm);font-style:normal;
+}
+
+/* ── Launch banner ── */
+.launch-banner{max-width:420px;margin:0 auto;padding:0 1.5rem;text-align:center}
+.lb-inner{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 1rem;border-radius:100px;border:1px solid var(--border);
+}
+.lb-inner span{font-family:'Space Mono',monospace;font-size:0.6875rem;letter-spacing:0.04em;color:var(--warm)}
+
+/* ── Bottom CTA — full form ── */
+.cta-bottom{max-width:420px;margin:0 auto;padding:0 1.5rem 2rem;text-align:center}
+.cta-bottom-h{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:1.125rem;color:var(--night);margin-bottom:0.25rem}
+.cta-bottom-p{font-size:0.875rem;font-weight:300;color:var(--muted);margin-bottom:1.25rem}
+.cta-bottom .scarcity{margin-top:0.75rem}
+.post{display:none;text-align:center}
+.post.on{display:block}
+
+/* ── Sticky bar ── */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(253,251,248,0.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);padding:0.75rem 1.25rem;
+  transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.sticky-bar.show{transform:translateY(0)}
+.sticky-bar.hide-final{transform:translateY(100%) !important}
+.sticky-inner{
+  max-width:420px;margin:0 auto;display:flex;gap:0.5rem;align-items:center;
+}
+.sticky-inner .em-in{
+  flex:1;padding:0.75rem 0.875rem;background:var(--white);
+  border:1.5px solid var(--border);border-radius:8px;
+  font-family:inherit;font-size:0.875rem;font-weight:400;
+  color:var(--night);outline:none;min-width:0;
+}
+.sticky-inner .em-in::placeholder{color:var(--muted);font-weight:300}
+.sticky-inner .em-in:focus{border-color:rgba(196,112,63,0.45)}
+.sticky-inner .join-btn{border-radius:8px;padding:0.75rem 1.125rem;font-size:0.8125rem}
+
+/* ── Footer ── */
+.foot{padding:3rem 1.5rem 5rem;text-align:center}
+.foot-t{font-family:'Space Mono',monospace;font-size:0.625rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+
+/* ── Animation ── */
+.rv{opacity:0;transform:translateY(14px);transition:opacity 0.6s ease,transform 0.6s ease}
+.rv.v{opacity:1;transform:none}
+.en{opacity:0;transform:translateY(8px);animation:up 0.7s ease forwards}
+.d1{animation-delay:.06s}.d2{animation-delay:.14s}
+.d3{animation-delay:.22s}.d4{animation-delay:.3s}.d5{animation-delay:.38s}
+@keyframes up{to{opacity:1;transform:none}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .en,.rv{opacity:1;transform:none}
+  .orb-g,.orb-c{animation:none;opacity:0.85}
+  .sticky-bar{transform:none}
+}
+@media(max-width:480px){
+  .hero{padding:1.5rem 1.25rem 1rem}
+  .orb-w{width:48px;height:48px;margin-bottom:1rem}
+  .sec,.fit-section{padding-left:1.25rem;padding-right:1.25rem}
+  .share-box,.q-box{padding:1rem}
+  .ref-step{padding:0.75rem 0.5rem}
+  .trust-bar{gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar en d1"><span class="wordmark">maren</span></div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="heroSection">
+  <div class="orb-w en d2"><div class="orb-g"></div><div class="orb-c"></div></div>
+
+  <h1 class="hero-h en d3">What if you didn't have to search for the right person?</h1>
+
+  <p class="hero-p en d4">Maren is not a dating app. She's a matchmaker.</p>
+
+  <div class="form-wrap en d5">
+
+    <!-- ── Step progress ── -->
+    <div class="step-progress" id="stepProgress">
+      <div class="sp-dot current" data-step="1"></div>
+      <div class="sp-dot" data-step="2"></div>
+      <div class="sp-dot" data-step="3"></div>
+    </div>
+
+    <!-- ══ STEP 1: Email + City ══ -->
+    <div class="step active" id="step1">
+      <div class="inline-btn">
+        <input type="email" id="emailIn" class="em-in" placeholder="your email" autocomplete="email" aria-label="Email address">
+        <button type="button" class="join-btn" id="joinBtn">Next</button>
+      </div>
+      <div class="field-row" style="margin-top:0.5rem">
+        <input type="text" id="cityIn" class="field-in" placeholder="your city (optional)" autocomplete="address-level2" aria-label="City">
+      </div>
+      <p class="form-msg" id="msg">&nbsp;</p>
+
+      <div class="scarcity" id="scarcity1" hidden>
+        <div class="scarcity-label">
+          <span class="scarcity-count"><strong id="totalCount">—</strong> on the waitlist</span>
+          <span class="scarcity-cap">5,000 spots in Charlotte</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="barFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="proof-row" id="proofRow" hidden>
+        <span class="proof-item" id="proofToday" hidden><strong id="todayCount">—</strong> joined today</span>
+        <span class="proof-dot" id="proofDot" hidden></span>
+        <span class="proof-item" id="proofCity" hidden><strong id="cityCount">—</strong> from Charlotte</span>
+      </div>
+
+      <div class="velocity-badge" id="velocityBadge" hidden>
+        <span class="velocity-dot"></span>
+        <span id="velocityText"></span>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2: Qualifying question ══ -->
+    <div class="step" id="step2">
+      <p class="step-label">One quick question.</p>
+      <p class="step-sub">What's the most frustrating thing about dating apps?</p>
+
+      <div class="q-chips" id="qChips">
+        <button type="button" class="q-chip" data-val="Too many bad matches">Too many bad matches</button>
+        <button type="button" class="q-chip" data-val="Conversations go nowhere">Conversations go nowhere</button>
+        <button type="button" class="q-chip" data-val="It feels like a chore">Feels like a chore</button>
+        <button type="button" class="q-chip" data-val="People aren't serious">People aren't serious</button>
+      </div>
+      <textarea id="qCustom" class="q-custom" placeholder="Or tell us in your own words..." maxlength="200"></textarea>
+      <button type="button" class="next-btn" id="step2Btn">Continue</button>
+    </div>
+
+    <!-- ══ STEP 3: Phone (optional) ══ -->
+    <div class="step" id="step3">
+      <p class="step-label">Want a text when it's your turn?</p>
+      <p class="step-sub">We'll send one message. No spam, no newsletters. Just "you're in."</p>
+
+      <div class="phone-row">
+        <span class="phone-flag">🇺🇸</span>
+        <input type="tel" id="phoneIn" class="phone-in" placeholder="(555) 000-0000" autocomplete="tel" aria-label="Phone number">
+      </div>
+      <p class="phone-note">SMS only. We'll never share your number.</p>
+
+      <button type="button" class="next-btn" id="step3Btn">Save my spot</button>
+      <button type="button" class="skip-phone" id="skipPhone">Skip — just use email</button>
+    </div>
+
+    <!-- ══ STEP 4: Success ══ -->
+    <div class="step" id="step4">
+      <div class="badge" id="posBadge"></div>
+      <h2 class="suc-h">You're in.</h2>
+      <p class="suc-p">We'll reach out when it's your turn. The earlier you joined, the sooner you get in.</p>
+
+      <div class="share-box">
+        <p class="share-label">Move up the line.</p>
+        <p class="share-sub">Every friend who joins bumps you closer to the front.</p>
+        <div class="share-row">
+          <input type="text" class="share-link" id="shareLink" value="" readonly>
+          <button type="button" class="copy-btn" id="copyBtn">Copy</button>
+        </div>
+        <p class="ref-count" id="refCount" hidden></p>
+      </div>
+
+      <div class="ref-steps">
+        <div class="ref-step">
+          <div class="ref-icon">🔗</div>
+          <strong>Share your link</strong>
+          <p>Send it to someone who deserves better dates</p>
+        </div>
+        <div class="ref-step">
+          <div class="ref-icon">✓</div>
+          <strong>They join</strong>
+          <p>You both move up the waitlist</p>
+        </div>
+        <div class="ref-step">
+          <div class="ref-icon">🔑</div>
+          <strong>Get in sooner</strong>
+          <p>Top referrers get earliest access</p>
+        </div>
+      </div>
+
+      <div class="q-box">
+        <div class="q-form" id="qForm">
+          <p class="q-box-label">If you could build the perfect way to find the right person, what would it do differently?</p>
+          <p class="q-box-opt">Totally optional. But we're listening.</p>
+          <textarea id="qTa" class="q-ta" placeholder="Whatever comes to mind..." maxlength="600"></textarea>
+          <div class="q-acts">
+            <button type="button" class="q-send" id="qSend">Share</button>
+            <button type="button" class="q-skip" id="qSkip">Skip</button>
+          </div>
+        </div>
+        <div class="q-thanks" id="qThanks">
+          <p class="thx-t" id="thxMsg">Noted. That actually helps.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ EXPLAINER ════════ -->
+<section class="explainer rv" data-sec="explainer">
+  <p class="explainer-declare">Maren is not a dating app. She's a matchmaker.</p>
+  <p class="explainer-p">She has a real conversation with you — about what matters, what hasn't worked, what you're actually looking for. Then when someone makes sense, she introduces you. <strong>One person. Chosen with intention, not pulled from a feed.</strong></p>
+</section>
+
+<!-- ════════ PAIN ════════ -->
+<section class="sec">
+  <div class="rule rv"></div>
+  <h2 class="sec-h rv" data-sec="pain">Here's the thing about dating apps.</h2>
+  <p class="sec-p rv">They hand you a deck of faces and say good luck. You match with people you'll never talk to. You talk to people you'll never meet. You meet people who looked right on screen and felt wrong in person.</p>
+  <p class="sec-p rv"><strong>Maren works differently.</strong> She doesn't show you a feed. She shows you one person — and tells you exactly why she thinks you two belong in the same room.</p>
+</section>
+
+<!-- ════════ PHONE PREVIEWS ════════ -->
+<section class="peek">
+  <h2 class="peek-h rv" data-sec="preview">A glimpse of what's coming.</h2>
+  <p class="peek-sub rv">This is what it looks like when someone finds the right person for you.</p>
+  <div class="phone-track rv" id="phoneTrack">
+    <div class="device">
+      <div class="island"></div>
+      <div class="screen">
+        <div class="ph-orb"><div class="ph-orb-glow"></div><div class="ph-orb-core"></div></div>
+        <p class="ph-title">I found someone.</p>
+        <p class="ph-sub">Someone I think you need to meet.</p>
+        <div class="ph-bars"><div class="ph-bar b1"></div><div class="ph-bar b2"></div><div class="ph-bar b3"></div><div class="ph-bar b4"></div></div>
+      </div>
+    </div>
+    <div class="device">
+      <div class="island"></div>
+      <div class="screen">
+        <p class="ph-label">Why you two</p>
+        <p class="ph-insight"><strong>You both get quiet when things get tense</strong> — then circle back once you've had time to think. That's rarer than you'd expect.</p>
+        <div class="ph-redact"><div class="rl rl1"></div><div class="rl rl2"></div><div class="rl rl3"></div><div class="rl rl4"></div><div class="rl rl5"></div></div>
+      </div>
+    </div>
+    <div class="device">
+      <div class="island"></div>
+      <div class="screen">
+        <div class="ph-lock"><div class="ph-lock-icon"></div></div>
+        <p class="ph-more-title">There's more.</p>
+        <p class="ph-more-sub">A lot more. This is just the beginning of how Maren introduces you.</p>
+        <div class="ph-more-bars"><div class="ph-bar b1"></div><div class="ph-bar b2"></div><div class="ph-bar b3"></div><div class="ph-bar b4"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="peek-dots" id="peekDots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+  <p class="peek-caption rv"><strong>This is what your first match looks like.</strong> Join the list to see who it is.</p>
+</section>
+
+<!-- ════════ FIT SECTION ════════ -->
+<section class="fit-section">
+  <h2 class="fit-h rv" data-sec="fit">Maren isn't for everyone.</h2>
+  <div class="fit-card rv">
+    <p><strong>This is for you if</strong> you're tired of treating dating like a part-time job. You've been on the apps, done the swiping, and you know the process itself is broken. You want fewer, better introductions from someone who actually understands what you need.</p>
+  </div>
+  <div class="not-card rv">
+    <p>If you want to browse hundreds of profiles on a Friday night, Maren probably isn't your thing. And that's fine.</p>
+  </div>
+</section>
+
+<!-- ════════ FOUNDER NOTE ════════ -->
+<section class="founder-note rv" data-sec="founder">
+  <div class="fn-inner">
+    <p class="fn-q">"I built Maren because I watched good people waste years on apps that were never designed to help them find someone. The business model was attention, not outcomes. I wanted to build the opposite."</p>
+    <p class="fn-attr"><strong>— Aoh</strong>, founder · Charlotte, NC</p>
+  </div>
+</section>
+
+<!-- ════════ TRUST BAR ════════ -->
+<div class="trust-bar rv" data-sec="trust">
+  <span class="trust-item"><span class="t-icon">✦</span> Solo-built in Charlotte</span>
+  <span class="trust-item"><span class="t-icon">◉</span> AI-powered matching</span>
+  <span class="trust-item"><span class="t-icon">♡</span> Outcomes over attention</span>
+</div>
+
+<!-- ════════ LAUNCH BANNER ════════ -->
+<div class="launch-banner rv" style="padding-top:0.5rem;padding-bottom:2rem">
+  <div class="lb-inner"><span>Charlotte beta opens Fall 2026</span></div>
+</div>
+
+<!-- ════════ BOTTOM CTA ════════ -->
+<section class="cta-bottom rv" data-sec="cta_bottom">
+  <h2 class="cta-bottom-h">The list is moving.</h2>
+  <p class="cta-bottom-p">First 5,000 get early access. After that, there's a real line.</p>
+
+  <div id="formLive2">
+    <div class="inline-btn">
+      <input type="email" id="emailIn2" class="em-in" placeholder="your email" autocomplete="email" aria-label="Email address">
+      <button type="button" class="join-btn" id="joinBtn2">Save my spot</button>
+    </div>
+    <p class="form-msg" id="msg2">&nbsp;</p>
+    <div class="scarcity" id="scarcity2" style="margin-top:0.75rem" hidden>
+      <div class="scarcity-label">
+        <span class="scarcity-count"><strong id="totalCount2">—</strong> on the waitlist</span>
+        <span class="scarcity-cap">5,000 spots</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="barFill2" style="width:0%"></div></div>
+    </div>
+  </div>
+  <!-- <div class="post" id="postArea2" style="margin-top:1rem">
+    <p class="suc-h" style="font-size:1.125rem">You're already on the list ✓</p>
+    <p style="font-size:0.875rem;font-weight:300;color:var(--muted);margin-top:0.25rem">Share your link to move up.</p>
+  </div> -->
+</section>
+
+<footer class="foot">
+  <p class="foot-t">Maren · Charlotte, NC · Fall 2026</p>
+</footer>
+
+<!-- ── Sticky bar ── -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-inner">
+    <input type="email" id="stickyEmail" class="em-in" placeholder="your email" autocomplete="email" aria-label="Email address">
+    <button type="button" class="join-btn" id="stickyBtn">Save my spot</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ══════════════════════════════════════════════════════════
+     Supabase — no SDK on purpose. Two headers and a POST is the
+     whole contract, so the page stays one dependency-free file.
+     The publishable key is safe here: the waitlist table has RLS
+     on with no policies and every grant revoked, so these four
+     RPCs are the only reachable surface. See supabase/schema.sql.
+     ══════════════════════════════════════════════════════════ */
+  var SUPABASE_URL = 'https://yeayejlzcrykgfmnigxy.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_bc0h8u3Rspkke0wc5izmGA_6F2W_Hdx';
+
+  function rpc(fn, args, opts){
+    return fetch(SUPABASE_URL + '/rest/v1/rpc/' + fn, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(args || {}),
+      keepalive: !!(opts && opts.keepalive)
+    }).then(function(r){
+      return r.text().then(function(t){
+        var body = null;
+        try { body = t ? JSON.parse(t) : null; } catch(e){}
+        if(!r.ok){
+          throw new Error((body && (body.message || body.hint)) ||
+                          'Something went wrong. Please try again.');
+        }
+        return body;
+      });
+    });
+  }
+
+  /* ── Storage that survives private mode ── */
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+  function ssGet(k){ try{ return sessionStorage.getItem(k); }catch(e){ return null } }
+  function ssSet(k,v){ try{ sessionStorage.setItem(k,v); }catch(e){} }
+
+  function uuid(){
+    if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    if(window.crypto && crypto.getRandomValues){
+      var b = crypto.getRandomValues(new Uint8Array(16));
+      b[6] = (b[6] & 0x0f) | 0x40;
+      b[8] = (b[8] & 0x3f) | 0x80;
+      var h = [];
+      for(var i=0;i<16;i++) h.push((b[i] + 0x100).toString(16).slice(1));
+      return h.slice(0,4).join('')+'-'+h.slice(4,6).join('')+'-'+h.slice(6,8).join('')+
+             '-'+h.slice(8,10).join('')+'-'+h.slice(10,16).join('');
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
+      var r = Math.random()*16|0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  /* ── Identity ── */
+  var SESSION_KEY = 'maren_session';
+  var session = null;
+  try { session = JSON.parse(lsGet(SESSION_KEY) || 'null'); } catch(e){}
+
+  function saveSession(p){
+    if(!p || !p.token) return;
+    session = { token: p.token, referral_code: p.referral_code, position: p.position };
+    lsSet(SESSION_KEY, JSON.stringify(session));
+  }
+
+  var visitorId = lsGet('maren_vid');
+  if(!visitorId){ visitorId = uuid(); lsSet('maren_vid', visitorId); }
+  var sessionId = ssGet('maren_sid');
+  if(!sessionId){ sessionId = uuid(); ssSet('maren_sid', sessionId); }
+
+  /* ── Attribution: stashed so it survives the multi-step flow ── */
+  var params  = new URLSearchParams(location.search);
+  var refCode = ssGet('maren_ref') || params.get('ref') || '';
+  if(refCode) ssSet('maren_ref', refCode);
+
+  var ctx = null;
+  try { ctx = JSON.parse(ssGet('maren_ctx') || 'null'); } catch(e){}
+  if(!ctx){
+    ctx = {
+      path:         location.pathname,
+      referrer:     document.referrer || '',
+      utm_source:   params.get('utm_source') || '',
+      utm_medium:   params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      ref:          refCode
+    };
+    ssSet('maren_ctx', JSON.stringify(ctx));
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     Analytics — batched, fire-and-forget. A tracking failure must
+     never surface an error or block a click.
+     ══════════════════════════════════════════════════════════ */
+  var queue = [], flushTimer = null, t0 = Date.now();
+
+  function track(name, props){
+    var p = props || {};
+    p.ms = Date.now() - t0;
+    queue.push({ n: name, p: p });
+    if(queue.length >= 25) flush();
+    else if(!flushTimer) flushTimer = setTimeout(flush, 5000);
+  }
+
+  function flush(opts){
+    if(flushTimer){ clearTimeout(flushTimer); flushTimer = null; }
+    if(!queue.length) return;
+    var batch = queue.splice(0, 50);
+    rpc('track', {
+      p_visitor: visitorId,
+      p_session: sessionId,
+      p_events:  batch,
+      p_ctx:     ctx
+    }, opts).catch(function(){});
+  }
+
+  /* Visible time, paused while the tab is in the background. */
+  var visAccum = 0;
+  var visStart = document.visibilityState === 'visible' ? Date.now() : 0;
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'hidden'){
+      if(visStart){ visAccum += Date.now() - visStart; visStart = 0; }
+    } else if(!visStart){
+      visStart = Date.now();
+    }
+  });
+
+  var exitSent = false, maxStep = 1, restoring = false;
+  function finalFlush(){
+    if(!exitSent){
+      exitSent = true;
+      var ms = visAccum + (visStart ? Date.now() - visStart : 0);
+      track('exit', { step: maxStep, seconds: Math.round(ms / 1000) });
+    }
+    /* keepalive, not sendBeacon: sendBeacon cannot set the apikey header,
+       and a JSON body is not CORS-safelisted so it would need a preflight
+       it has no way to issue. */
+    flush({ keepalive: true });
+  }
+  window.addEventListener('pagehide', finalFlush);
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'hidden') finalFlush();
+  });
+
+  track('page_view', {});
+
+  /* ── Scroll reveals (also the section_view source) ── */
+  function reveal(el){
+    el.classList.add('v');
+    var name = el.getAttribute('data-sec');
+    if(name) track('section_view', { name: name });
+  }
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      for(var i=0;i<entries.length;i++){
+        if(entries[i].isIntersecting){ reveal(entries[i].target); obs.unobserve(entries[i].target) }
+      }
+    },{threshold:0.1});
+    var rvs=document.querySelectorAll('.rv');
+    for(var i=0;i<rvs.length;i++) obs.observe(rvs[i]);
+  }else{
+    var rvs=document.querySelectorAll('.rv');
+    for(var i=0;i<rvs.length;i++) rvs[i].classList.add('v');
+  }
+
+  /* ── State ── */
+  var TOTAL_CAP = 5000;
+  var MIN_SHOW  = 25;   // below this the waitlist count says nothing worth saying
+  var signed = false;
+
+  /* ── Elements ── */
+  var emailIn  = document.getElementById('emailIn');
+  var cityIn   = document.getElementById('cityIn');
+  var joinBtn  = document.getElementById('joinBtn');
+  var msg      = document.getElementById('msg');
+
+  var totalEl   = document.getElementById('totalCount');
+  var todayEl   = document.getElementById('todayCount');
+  var cityEl    = document.getElementById('cityCount');
+  var barFill   = document.getElementById('barFill');
+  var totalEl2  = document.getElementById('totalCount2');
+  var barFill2  = document.getElementById('barFill2');
+  var scarcity1 = document.getElementById('scarcity1');
+  var scarcity2 = document.getElementById('scarcity2');
+  var proofRow  = document.getElementById('proofRow');
+  var proofToday= document.getElementById('proofToday');
+  var proofDot  = document.getElementById('proofDot');
+  var proofCity = document.getElementById('proofCity');
+  var velBadge  = document.getElementById('velocityBadge');
+  var velText   = document.getElementById('velocityText');
+
+  var posBadge   = document.getElementById('posBadge');
+  var shareLink  = document.getElementById('shareLink');
+  var refCountEl = document.getElementById('refCount');
+
+  // Steps
+  var steps = [
+    document.getElementById('step1'),
+    document.getElementById('step2'),
+    document.getElementById('step3'),
+    document.getElementById('step4')
+  ];
+  var progressDots = document.querySelectorAll('#stepProgress .sp-dot');
+
+  // Bottom form
+  var emailIn2 = document.getElementById('emailIn2');
+  var joinBtn2 = document.getElementById('joinBtn2');
+  var msg2     = document.getElementById('msg2');
+  var formLive2= document.getElementById('formLive2');
+  var postArea2= document.getElementById('postArea2');
+
+  // Sticky
+  var stickyBar   = document.getElementById('stickyBar');
+  var stickyEmail = document.getElementById('stickyEmail');
+  var stickyBtn   = document.getElementById('stickyBtn');
+
+  /* ══════════════════════════════════════════════════════════
+     Stats — real numbers only. Anything that would be zero or
+     unsubstantiated stays hidden rather than showing a placeholder.
+     ══════════════════════════════════════════════════════════ */
+  function renderStats(s){
+    if(!s) return;
+    var total = s.total|0, todayN = s.today|0, cityN = s.city|0;
+    var week  = s.week|0,  prev   = s.prev_week|0;
+
+    if(total >= MIN_SHOW){
+      var f = total.toLocaleString();
+      totalEl.textContent  = f;
+      totalEl2.textContent = f;
+      scarcity1.hidden = false;
+      scarcity2.hidden = false;
+      var pct = Math.min((total / TOTAL_CAP) * 100, 100);
+      setTimeout(function(){
+        barFill.style.width  = pct + '%';
+        barFill2.style.width = pct + '%';
+      }, 100);
+    }
+
+    if(todayN > 0){ todayEl.textContent = todayN; proofToday.hidden = false }
+    if(cityN  > 0){ cityEl.textContent  = cityN;  proofCity.hidden  = false }
+    proofDot.hidden = !(todayN > 0 && cityN > 0);
+    proofRow.hidden = !(todayN > 0 || cityN > 0);
+
+    // Only claim acceleration when there is a prior week to compare against.
+    var ratio = prev > 0 ? week / prev : 0;
+    if(ratio >= 1.2){
+      velText.textContent = 'Filling ' + (Math.round(ratio * 10) / 10) + '× faster than last week';
+      velBadge.hidden = false;
+    } else {
+      velBadge.hidden = true;
+    }
+  }
+
+  function loadStats(){ rpc('waitlist_stats').then(renderStats).catch(function(){}) }
+  loadStats();
+  setInterval(loadStats, 60000);
+
+  /* ── Validation / messages ── */
+  function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim())}
+  function showErr(el,t){el.textContent=t;el.className='form-msg err'}
+  function clearErr(el){el.innerHTML='&nbsp;';el.className='form-msg'}
+  emailIn.addEventListener('input',function(){clearErr(msg)});
+  emailIn2.addEventListener('input',function(){clearErr(msg2)});
+
+  var focusSent = false;
+  var focusables = [emailIn, cityIn, emailIn2, stickyEmail];
+  for(var fi=0; fi<focusables.length; fi++){
+    focusables[fi].addEventListener('focus', function(){
+      if(focusSent) return;
+      focusSent = true;
+      track('form_focus', {});
+    });
+  }
+
+  /* ── Step navigation ── */
+  function goToStep(n){
+    // n is 1-indexed
+    for(var i=0;i<steps.length;i++){
+      steps[i].classList.remove('active');
+      steps[i].classList.remove('step-enter');
+    }
+    steps[n-1].classList.add('active');
+    steps[n-1].classList.add('step-enter');
+
+    // Update progress dots
+    for(var i=0;i<progressDots.length;i++){
+      var dotStep = parseInt(progressDots[i].getAttribute('data-step'));
+      progressDots[i].className = 'sp-dot';
+      if(dotStep < n) progressDots[i].classList.add('done');
+      else if(dotStep === n && n <= 3) progressDots[i].classList.add('current');
+      else if(n === 4) progressDots[i].classList.add('done');
+    }
+
+    // Hide progress on success
+    document.getElementById('stepProgress').style.display = (n === 4) ? 'none' : 'flex';
+
+    if(n > maxStep) maxStep = n;
+    // Restoring a past signup is not progress through the funnel — counting it
+    // would invent step-4 visitors who never walked the form this visit.
+    if(!restoring) track('step_view', { n: n });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     Signup. The row is created the moment a valid email exists,
+     so someone who abandons at step 2 still leaves a usable record.
+     ══════════════════════════════════════════════════════════ */
+  function submitEmail(btn, label, msgEl, email, city, source, onDone, onError){
+    btn.disabled = true;
+    btn.textContent = '...';
+    rpc('join_waitlist', {
+      p_email:   email,
+      p_city:    city || null,
+      p_ref:     refCode || null,
+      p_source:  source,
+      p_visitor: visitorId
+    }).then(function(p){
+      saveSession(p);
+      flush();                       // land the pre-signup events under this row
+      btn.disabled = false;
+      btn.textContent = label;
+      onDone(p);
+    }).catch(function(err){
+      btn.disabled = false;
+      btn.textContent = label;
+      showErr(msgEl, err.message || 'Something went wrong. Please try again.');
+      if(onError) onError();
+    });
+  }
+
+  /* ── STEP 1: Email → Step 2 ── */
+  joinBtn.addEventListener('click', function(){
+    var email = emailIn.value.trim();
+    if(!email){showErr(msg,'Enter your email.');emailIn.focus();track('email_invalid',{reason:'empty',source:'hero'});return}
+    if(!validEmail(email)){showErr(msg,"That doesn't look right.");emailIn.focus();track('email_invalid',{reason:'format',source:'hero'});return}
+    clearErr(msg);
+    track('email_valid', { source:'hero' });
+    submitEmail(joinBtn, 'Next', msg, email, cityIn.value.trim(), 'hero', function(){
+      goToStep(2);
+    });
+  });
+  emailIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();joinBtn.click()}});
+  cityIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();joinBtn.click()}});
+
+  /* ── STEP 2: Qualifying question ── */
+  var chips = document.querySelectorAll('#qChips .q-chip');
+  var qCustom = document.getElementById('qCustom');
+  var selectedChip = '';
+
+  for(var i=0;i<chips.length;i++){
+    chips[i].addEventListener('click', function(){
+      // Deselect all
+      for(var j=0;j<chips.length;j++) chips[j].classList.remove('selected');
+      this.classList.add('selected');
+      selectedChip = this.getAttribute('data-val');
+      track('chip_select', { value: selectedChip });
+    });
+  }
+
+  document.getElementById('step2Btn').addEventListener('click', function(){
+    var custom = qCustom.value.trim();
+    var answer = custom || selectedChip;
+    track('step_continue', { n:2, has_custom_text: !!custom, answered: !!answer });
+    // Fire and forget: the email is already in the DB, and an optional field
+    // is not worth stalling the funnel over.
+    if(session && session.token && answer){
+      rpc('update_waitlist', { p_token: session.token, p_frustration: answer }).catch(function(){});
+    }
+    goToStep(3);
+  });
+
+  /* ── STEP 3: Phone (optional) + finish ── */
+  var step3Btn  = document.getElementById('step3Btn');
+  var skipPhone = document.getElementById('skipPhone');
+  var phoneIn   = document.getElementById('phoneIn');
+
+  step3Btn.addEventListener('click', function(){ completeSignup(phoneIn.value.trim(), false) });
+  skipPhone.addEventListener('click', function(){ completeSignup('', true) });
+  phoneIn.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();step3Btn.click()}
+  });
+
+  function completeSignup(phone, viaSkip){
+    track(viaSkip ? 'phone_skip' : 'phone_submit', {});
+
+    if(!session || !session.token){
+      // The row is created at step 1, so this is unreachable in practice —
+      // but never strand someone on a dead button.
+      goToStep(1);
+      showErr(msg, 'Please enter your email to continue.');
+      return;
+    }
+
+    var label = step3Btn.textContent;
+    step3Btn.disabled = true; skipPhone.disabled = true; step3Btn.textContent = '...';
+
+    function finish(p){
+      step3Btn.disabled = false; skipPhone.disabled = false; step3Btn.textContent = label;
+      showSuccess(p, true, 'hero');
+    }
+    rpc('update_waitlist', { p_token: session.token, p_phone: phone || null })
+      .then(function(p){ saveSession(p); finish(p) })
+      // The signup itself already succeeded at step 1; a failed phone patch
+      // is not a reason to deny them the success screen.
+      .catch(function(){ finish(session) });
+  }
+
+  function shareUrl(code){
+    var base = 'https://meetmaren.app/';
+    if(location.protocol === 'http:' || location.protocol === 'https:'){
+      base = location.origin + location.pathname.replace(/[^/]*$/, '');
+    }
+    return base + '?ref=' + (code || '');
+  }
+
+  function showSuccess(p, isNew, source){
+    signed = true;
+    p = p || {};
+
+    posBadge.textContent = p.position
+      ? "You're #" + Number(p.position).toLocaleString() + " on the list"
+      : "You're on the list";
+    shareLink.value = shareUrl(p.referral_code);
+
+    var n = p.referrals | 0;
+    if(n > 0){
+      refCountEl.textContent = n + (n === 1 ? ' friend has' : ' friends have') +
+                               ' joined — you moved up ' + (n * 25).toLocaleString() + ' spots';
+      refCountEl.hidden = false;
+    } else {
+      refCountEl.hidden = true;
+    }
+
+    goToStep(4);
+    formLive2.style.display = 'none';
+    postArea2.classList.add('on');
+    stickyBar.classList.remove('show');
+    stickyBar.classList.add('hide-final');
+
+    if(isNew){
+      track('signup_complete', { source: source || 'hero' });
+      flush();
+    }
+  }
+
+  /* ── Returning visitor: restore their real position ── */
+  if(session && session.token){
+    rpc('update_waitlist', { p_token: session.token }).then(function(p){
+      saveSession(p);
+      restoring = true;
+      showSuccess(p, false);
+      restoring = false;
+    }).catch(function(){
+      // Token no longer resolves (DB reset, row removed). Start clean rather
+      // than parking them on a success screen that means nothing.
+      lsDel(SESSION_KEY);
+      session = null;
+    });
+  }
+
+  /* ── Bottom form (single-step shortcut) ── */
+  joinBtn2.addEventListener('click', function(){
+    var email = emailIn2.value.trim();
+    if(!email){showErr(msg2,'Enter your email.');emailIn2.focus();track('email_invalid',{reason:'empty',source:'bottom'});return}
+    if(!validEmail(email)){showErr(msg2,"That doesn't look right.");emailIn2.focus();track('email_invalid',{reason:'format',source:'bottom'});return}
+    clearErr(msg2);
+    track('email_valid', { source:'bottom' });
+    submitEmail(joinBtn2, 'Save my spot', msg2, email, '', 'bottom', function(p){
+      showSuccess(p, true, 'bottom');
+      // Scroll to top to show full success state
+      document.getElementById('heroSection').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+  emailIn2.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();joinBtn2.click()}});
+
+  /* ── Sticky form ── */
+  stickyBtn.addEventListener('click', function(){
+    var email = stickyEmail.value.trim();
+    if(!email || !validEmail(email)){
+      emailIn.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(function(){emailIn.focus()},500);
+      track('email_invalid',{reason:'format',source:'sticky'});
+      return;
+    }
+    track('email_valid', { source:'sticky' });
+    // Errors land on the hero message, so bring it into view if one appears.
+    submitEmail(stickyBtn, 'Save my spot', msg, email, '', 'sticky', function(){
+      goToStep(2);
+      document.getElementById('heroSection').scrollIntoView({behavior:'smooth',block:'start'});
+      stickyBar.classList.remove('show');
+      stickyBar.classList.add('hide-final');
+    }, function(){
+      document.getElementById('heroSection').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+  stickyEmail.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();stickyBtn.click()}});
+
+  /* ── Copy link ── */
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.addEventListener('click', function(){
+    var val = shareLink.value;
+    track('share_copy', {});
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(val).then(function(){showCopied()},function(){fallbackCopy()});
+    } else {
+      fallbackCopy();
+    }
+  });
+  function fallbackCopy(){
+    shareLink.select();
+    try{ document.execCommand('copy') }catch(e){}
+    showCopied();
+  }
+  function showCopied(){
+    copyBtn.textContent='Copied';
+    copyBtn.classList.add('copied');
+    setTimeout(function(){copyBtn.textContent='Copy';copyBtn.classList.remove('copied')},2000);
+  }
+
+  /* ── Deep question (post-signup) ── */
+  var qTa=document.getElementById('qTa');
+  var qSend=document.getElementById('qSend');
+  var qSkip=document.getElementById('qSkip');
+  var qForm=document.getElementById('qForm');
+  var qThanks=document.getElementById('qThanks');
+  var thxMsg=document.getElementById('thxMsg');
+
+  qSend.addEventListener('click',function(){
+    var a=qTa.value.trim();
+    if(!a){qTa.focus();return}
+    qSend.disabled=true;qSend.textContent='...';
+    track('dream_send', { len: a.length });
+    function done(){ qForm.classList.add('off'); qThanks.classList.add('on') }
+    if(session && session.token){
+      rpc('update_waitlist',{p_token:session.token,p_dream_feature:a}).then(done,done);
+    } else {
+      done();
+    }
+  });
+  qSkip.addEventListener('click',function(){
+    track('dream_skip', {});
+    thxMsg.textContent="No worries. We'll be in touch.";
+    qForm.classList.add('off');qThanks.classList.add('on');
+  });
+
+  /* ── Sticky bar visibility + scroll depth ── */
+  var heroEl = document.getElementById('step1');
+  var stickyVisible = false;
+
+  function checkSticky(){
+    if(signed) return;
+    var heroRect = heroEl.getBoundingClientRect();
+    var heroGone = heroRect.bottom < 0;
+    // Check if bottom form is visible
+    var btmRect = formLive2.getBoundingClientRect();
+    var btmVisible = btmRect.top < window.innerHeight;
+    var shouldShow = heroGone && !btmVisible;
+    if(shouldShow && !stickyVisible){
+      stickyBar.classList.add('show');
+      stickyVisible = true;
+    } else if(!shouldShow && stickyVisible){
+      stickyBar.classList.remove('show');
+      stickyVisible = false;
+    }
+  }
+
+  var depths = [25,50,75,100], depthSent = {};
+  function checkDepth(){
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - window.innerHeight;
+    if(scrollable <= 0) return;
+    var pct = ((window.pageYOffset || doc.scrollTop) / scrollable) * 100;
+    for(var i=0;i<depths.length;i++){
+      if(pct >= depths[i] && !depthSent[depths[i]]){
+        depthSent[depths[i]] = true;
+        track('scroll_depth', { pct: depths[i] });
+      }
+    }
+  }
+
+  var scrollTick = false;
+  window.addEventListener('scroll',function(){
+    if(!scrollTick){
+      window.requestAnimationFrame(function(){checkSticky();checkDepth();scrollTick=false});
+      scrollTick = true;
+    }
+  },{passive:true});
+
+  /* ── Phone carousel dots ── */
+  var carTrack = document.getElementById('phoneTrack');
+  var dots = document.querySelectorAll('#peekDots .dot');
+  if(carTrack && dots.length){
+    var ticking = false, lastIdx = 0;
+    carTrack.addEventListener('scroll',function(){
+      if(!ticking){
+        window.requestAnimationFrame(function(){
+          var sl = carTrack.scrollLeft;
+          var cw = carTrack.querySelector('.device').offsetWidth + 16;
+          var idx = Math.max(0, Math.min(Math.round(sl / cw), dots.length - 1));
+          for(var i=0;i<dots.length;i++) dots[i].classList.toggle('active', i === idx);
+          if(idx !== lastIdx){ lastIdx = idx; track('carousel_swipe', { idx: idx }) }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    },{passive:true});
+  }
+})();
+</script>
+</body>
+</html>
