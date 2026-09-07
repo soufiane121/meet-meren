@@ -1,0 +1,3194 @@
+<!doctype html>
+<html lang="en" style="background: #fdfbf8">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+		/>
+		<meta name="color-scheme" content="light only" />
+		<title>Maren — Meet Someone Worth Your Time & Your Energy</title>
+		<meta
+			name="description"
+			content="You've done enough swiping. Maren gets to know you, then finds one person worth meeting — and tells you exactly why. Charlotte beta opens Fall 2026."
+		/>
+		<meta
+			property="og:title"
+			content="Maren — Meet Someone Worth Your Time | Charlotte Dating"
+		/>
+		<meta
+			property="og:description"
+			content="You've done enough swiping. Maren gets to know you, then finds one person worth meeting — and tells you exactly why. Charlotte beta — Fall 2026."
+		/>
+		<meta property="og:type" content="website" />
+
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Maren",
+				"url": "https://meetmaren.app",
+				"description": "Maren gets to know you first, then introduces you to someone worth your time. AI-powered dating in Charlotte, NC.",
+				"foundingLocation": {
+					"@type": "Place",
+					"name": "Charlotte, NC"
+				}
+			}
+		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				"mainEntity": [
+					{
+						"@type": "Question",
+						"name": "What is Maren?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Maren is an AI-powered dating app that gets to know you through conversation, then introduces you to one person at a time — with a detailed explanation of why you two might click."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "How is Maren different from other dating apps?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Instead of swiping through hundreds of profiles, Maren introduces you to one person at a time, chosen with intention. She tells you exactly why she thinks you two are worth an introduction."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "When does Maren launch in Charlotte?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Maren's Charlotte beta opens Fall 2026. The first 5,000 people on the waitlist get early access."
+						}
+					}
+				]
+			}
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://yeayejlzcrykgfmnigxy.supabase.co" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Space+Mono:wght@400&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			*,
+			*::before,
+			*::after {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+
+			:root {
+				--cream: #fdfbf8;
+				--night: #14100d;
+				--ember: #c4703f;
+				--warm: #6b635a;
+				--muted: #b5aea4;
+				--surface: #f3eee8;
+				--border: #e5dfd7;
+				--white: #ffffff;
+				--green: #3d7a4a;
+				--ember-soft: rgba(196, 112, 63, 0.08);
+			}
+
+			html {
+				font-size: 16px;
+				-webkit-font-smoothing: antialiased;
+				background: #fdfbf8 !important;
+				color-scheme: light only;
+			}
+			body {
+				background: #fdfbf8 !important;
+				color: #14100d;
+				font-family:
+					"DM Sans",
+					system-ui,
+					-apple-system,
+					sans-serif;
+				line-height: 1.6;
+				overflow-x: hidden;
+				min-height: 100vh;
+			}
+
+			.topbar {
+				padding: 1.75rem 1.5rem 0;
+				text-align: center;
+			}
+			.wordmark {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 400;
+				font-size: 1.125rem;
+				color: var(--night);
+			}
+
+			.orb-w {
+				width: 56px;
+				height: 56px;
+				margin: 0 auto 1.25rem;
+				position: relative;
+			}
+			.orb-g {
+				position: absolute;
+				inset: -50%;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle,
+					rgba(196, 112, 63, 0.06) 0%,
+					transparent 70%
+				);
+				animation: pulse 7s ease-in-out infinite;
+			}
+			.orb-c {
+				position: absolute;
+				inset: 0;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle at 44% 40%,
+					rgba(196, 112, 63, 0.1) 0%,
+					rgba(196, 112, 63, 0.22) 40%,
+					rgba(196, 112, 63, 0.05) 70%,
+					transparent 100%
+				);
+				animation: pulse 7s ease-in-out infinite;
+			}
+			@keyframes pulse {
+				0%,
+				100% {
+					transform: scale(1);
+					opacity: 0.8;
+				}
+				50% {
+					transform: scale(1.12);
+					opacity: 1;
+				}
+			}
+
+			.hero {
+				max-width: 540px;
+				margin: 0 auto;
+				padding: 2rem 1.5rem 1rem;
+				text-align: center;
+			}
+			.hero-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: clamp(1.55rem, 5vw, 2.3rem);
+				line-height: 1.25;
+				letter-spacing: -0.015em;
+				color: var(--night);
+				margin-bottom: 0.75rem;
+			}
+			.hero-p {
+				font-size: 1rem;
+				font-weight: 300;
+				color: var(--warm);
+				max-width: 380px;
+				margin: 0 auto 1.75rem;
+				line-height: 1.6;
+			}
+
+			.form-wrap {
+				max-width: 420px;
+				margin: 0 auto;
+				text-align: center;
+			}
+
+			.step {
+				display: none;
+			}
+			.step.active {
+				display: block;
+			}
+
+			.step-enter {
+				animation: stepIn 0.35s ease forwards;
+			}
+			@keyframes stepIn {
+				from {
+					opacity: 0;
+					transform: translateY(8px);
+				}
+				to {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			.step-progress {
+				display: flex;
+				gap: 6px;
+				justify-content: center;
+				margin-bottom: 1.25rem;
+			}
+			.sp-dot {
+				width: 24px;
+				height: 3px;
+				border-radius: 100px;
+				background: var(--border);
+				transition:
+					background 0.4s,
+					width 0.4s;
+			}
+			.sp-dot.done {
+				background: var(--ember);
+			}
+			.sp-dot.current {
+				background: var(--ember);
+				width: 36px;
+			}
+
+			.input-row {
+				display: flex;
+				border-radius: 10px;
+				overflow: hidden;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				transition: border-color 0.25s;
+			}
+			.input-row:focus-within {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+
+			.em-in {
+				flex: 1;
+				padding: 0.875rem 1rem;
+				background: transparent;
+				border: none;
+				outline: none;
+				min-width: 0;
+				font-family: inherit;
+				font-size: 0.9375rem;
+				font-weight: 400;
+				color: var(--night);
+			}
+			.em-in::placeholder {
+				color: var(--muted);
+				font-weight: 300;
+			}
+
+			.field-row {
+				margin-top: 0.5rem;
+				border-radius: 10px;
+				overflow: hidden;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				transition: border-color 0.25s;
+			}
+			.field-row:focus-within {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+			.field-in {
+				width: 100%;
+				padding: 0.75rem 1rem;
+				background: transparent;
+				border: none;
+				outline: none;
+				font-family: inherit;
+				font-size: 0.875rem;
+				font-weight: 400;
+				color: var(--night);
+			}
+			.field-in::placeholder {
+				color: var(--muted);
+				font-weight: 300;
+			}
+
+			.next-btn {
+				width: 100%;
+				margin-top: 0.75rem;
+				padding: 0.9375rem 1.375rem;
+				background: var(--night);
+				border: none;
+				cursor: pointer;
+				border-radius: 10px;
+				font-family: inherit;
+				font-size: 0.9375rem;
+				font-weight: 500;
+				color: var(--cream);
+				transition: background 0.2s;
+			}
+			.next-btn:hover {
+				background: #2a2420;
+			}
+			.next-btn:focus-visible {
+				outline: 2px solid var(--ember);
+				outline-offset: 2px;
+			}
+			.next-btn:disabled {
+				opacity: 0.4;
+				cursor: not-allowed;
+			}
+
+			.inline-btn {
+				display: flex;
+				border-radius: 10px;
+				overflow: hidden;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				transition: border-color 0.25s;
+			}
+			.inline-btn:focus-within {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+			.inline-btn .join-btn {
+				padding: 0.875rem 1.375rem;
+				background: var(--night);
+				border: none;
+				cursor: pointer;
+				white-space: nowrap;
+				flex-shrink: 0;
+				font-family: inherit;
+				font-size: 0.875rem;
+				font-weight: 500;
+				color: var(--cream);
+				transition: background 0.2s;
+			}
+			.inline-btn .join-btn:hover {
+				background: #2a2420;
+			}
+			.inline-btn .join-btn:disabled {
+				opacity: 0.4;
+				cursor: not-allowed;
+			}
+
+			.form-msg {
+				font-size: 0.8125rem;
+				min-height: 1.125rem;
+				margin-top: 0.5rem;
+				color: transparent;
+			}
+			.form-msg.err {
+				color: #b8453a;
+			}
+
+			.step-label {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.125rem;
+				color: var(--night);
+				margin-bottom: 0.25rem;
+				line-height: 1.4;
+				text-align: left;
+			}
+			.step-sub {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--muted);
+				margin-bottom: 1rem;
+				text-align: left;
+				line-height: 1.5;
+			}
+			.q-chips {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.375rem;
+				margin-bottom: 0.75rem;
+			}
+			.q-chip {
+				padding: 0.5rem 0.875rem;
+				background: var(--surface);
+				border: 1.5px solid var(--border);
+				border-radius: 100px;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 400;
+				color: var(--warm);
+				transition: all 0.2s;
+			}
+			.q-chip:hover {
+				border-color: rgba(196, 112, 63, 0.35);
+				color: var(--night);
+			}
+			.q-chip.selected {
+				background: var(--ember-soft);
+				border-color: var(--ember);
+				color: var(--night);
+			}
+			.q-custom {
+				width: 100%;
+				padding: 0.75rem 0.875rem;
+				background: var(--white);
+				border: 1.5px solid var(--border);
+				border-radius: 10px;
+				resize: none;
+				outline: none;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--night);
+				line-height: 1.5;
+				transition: border-color 0.25s;
+				min-height: 52px;
+			}
+			.q-custom::placeholder {
+				color: var(--muted);
+			}
+			.q-custom:focus {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+
+			.phone-row {
+				display: flex;
+				border-radius: 10px;
+				overflow: hidden;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				transition: border-color 0.25s;
+			}
+			.phone-row:focus-within {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+			.phone-flag {
+				padding: 0.75rem 0 0.75rem 1rem;
+				font-size: 0.9375rem;
+				color: var(--muted);
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+			}
+			.phone-in {
+				flex: 1;
+				padding: 0.75rem 0.75rem;
+				background: transparent;
+				border: none;
+				outline: none;
+				font-family: inherit;
+				font-size: 0.9375rem;
+				font-weight: 400;
+				color: var(--night);
+				min-width: 0;
+			}
+			.phone-in::placeholder {
+				color: var(--muted);
+				font-weight: 300;
+			}
+			.phone-note {
+				font-size: 0.75rem;
+				font-weight: 300;
+				color: var(--muted);
+				margin-top: 0.375rem;
+				text-align: left;
+				line-height: 1.4;
+			}
+			.skip-phone {
+				background: none;
+				border: none;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 400;
+				color: var(--muted);
+				margin-top: 0.5rem;
+			}
+			.skip-phone:hover {
+				color: var(--warm);
+			}
+
+			.scarcity {
+				margin-top: 1rem;
+			}
+			.scarcity-label {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				margin-bottom: 0.375rem;
+			}
+			.scarcity-count {
+				font-family: "Space Mono", monospace;
+				font-size: 0.75rem;
+				letter-spacing: 0.02em;
+				color: var(--warm);
+			}
+			.scarcity-count strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+			.scarcity-cap {
+				font-size: 0.6875rem;
+				font-weight: 300;
+				color: var(--muted);
+			}
+			.bar-track {
+				width: 100%;
+				height: 6px;
+				background: var(--surface);
+				border-radius: 100px;
+				overflow: hidden;
+				position: relative;
+			}
+			.bar-fill {
+				height: 100%;
+				border-radius: 100px;
+				background: linear-gradient(90deg, var(--ember), #d4884e);
+				transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+				position: relative;
+			}
+			.bar-fill::after {
+				content: "";
+				position: absolute;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 24px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(255, 255, 255, 0.3)
+				);
+				border-radius: 0 100px 100px 0;
+				animation: bar-shimmer 2.5s ease-in-out infinite;
+			}
+			@keyframes bar-shimmer {
+				0%,
+				100% {
+					opacity: 0.3;
+				}
+				50% {
+					opacity: 0.8;
+				}
+			}
+
+			.proof-row {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.625rem;
+				margin-top: 0.75rem;
+				flex-wrap: wrap;
+			}
+			.proof-item {
+				font-family: "Space Mono", monospace;
+				font-size: 0.6875rem;
+				letter-spacing: 0.04em;
+				color: var(--muted);
+			}
+			.proof-item strong {
+				font-weight: 400;
+				color: var(--warm);
+			}
+			.proof-dot {
+				width: 3px;
+				height: 3px;
+				border-radius: 50%;
+				background: var(--border);
+				flex-shrink: 0;
+			}
+
+			.velocity-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.375rem;
+				margin-top: 0.75rem;
+				padding: 0.3rem 0.75rem;
+				background: rgba(61, 122, 74, 0.06);
+				border-radius: 100px;
+				font-size: 0.6875rem;
+				font-weight: 400;
+				color: var(--green);
+			}
+			.velocity-dot {
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background: var(--green);
+				animation: v-pulse 2s ease-in-out infinite;
+			}
+			@keyframes v-pulse {
+				0%,
+				100% {
+					opacity: 0.4;
+				}
+				50% {
+					opacity: 1;
+				}
+			}
+
+			.badge {
+				display: inline-block;
+				font-family: "Space Mono", monospace;
+				font-size: 0.6875rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--ember);
+				background: var(--ember-soft);
+				padding: 0.375rem 0.875rem;
+				border-radius: 100px;
+				margin-bottom: 1rem;
+			}
+			.suc-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.5rem;
+				color: var(--night);
+				margin-bottom: 0.5rem;
+			}
+			.suc-p {
+				font-size: 0.9375rem;
+				font-weight: 300;
+				color: var(--warm);
+				margin-bottom: 2rem;
+				line-height: 1.6;
+			}
+
+			.share-box {
+				background: var(--surface);
+				border-radius: 12px;
+				padding: 1.25rem;
+				max-width: 420px;
+				margin: 0 auto 1rem;
+			}
+			.share-label {
+				font-size: 0.875rem;
+				font-weight: 400;
+				color: var(--night);
+				margin-bottom: 0.25rem;
+			}
+			.share-sub {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--ember);
+				margin-bottom: 0.75rem;
+			}
+			.share-row {
+				display: flex;
+				gap: 0.5rem;
+			}
+			.share-link {
+				flex: 1;
+				padding: 0.625rem 0.75rem;
+				background: var(--white);
+				border: 1.5px solid var(--border);
+				border-radius: 8px;
+				font-family: "Space Mono", monospace;
+				font-size: 0.6875rem;
+				color: var(--warm);
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				outline: none;
+			}
+			.copy-btn {
+				padding: 0.625rem 1rem;
+				background: var(--night);
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--cream);
+				transition: background 0.2s;
+				white-space: nowrap;
+				flex-shrink: 0;
+			}
+			.copy-btn:hover {
+				background: #2a2420;
+			}
+			.copied {
+				background: var(--green) !important;
+			}
+			.ref-count {
+				margin-top: 0.75rem;
+				font-family: "Space Mono", monospace;
+				font-size: 0.6875rem;
+				letter-spacing: 0.02em;
+				color: var(--green);
+			}
+
+			.ref-steps {
+				display: flex;
+				gap: 0.5rem;
+				max-width: 420px;
+				margin: 0 auto 2rem;
+			}
+			.ref-step {
+				flex: 1;
+				background: var(--surface);
+				border-radius: 10px;
+				padding: 0.875rem 0.75rem;
+				text-align: center;
+			}
+			.ref-icon {
+				font-size: 1.125rem;
+				margin-bottom: 0.25rem;
+			}
+			.ref-step p {
+				font-size: 0.6875rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.4;
+			}
+			.ref-step strong {
+				font-weight: 400;
+				color: var(--night);
+				display: block;
+				font-size: 0.75rem;
+				margin-bottom: 0.125rem;
+			}
+
+			.q-box {
+				text-align: left;
+				background: var(--surface);
+				border-radius: 12px;
+				padding: 1.25rem;
+				max-width: 420px;
+				margin: 0 auto;
+			}
+			.q-box-label {
+				font-size: 0.9375rem;
+				font-weight: 400;
+				color: var(--night);
+				line-height: 1.5;
+				margin-bottom: 0.2rem;
+			}
+			.q-box-opt {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--muted);
+				margin-bottom: 0.875rem;
+			}
+			.q-ta {
+				width: 100%;
+				min-height: 80px;
+				padding: 0.75rem 0.875rem;
+				background: var(--white);
+				border: 1.5px solid var(--border);
+				border-radius: 8px;
+				resize: vertical;
+				outline: none;
+				font-family: inherit;
+				font-size: 0.875rem;
+				font-weight: 300;
+				color: var(--night);
+				line-height: 1.55;
+				transition: border-color 0.25s;
+			}
+			.q-ta::placeholder {
+				color: var(--muted);
+			}
+			.q-ta:focus {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+			.q-acts {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-top: 0.75rem;
+			}
+			.q-send {
+				padding: 0.625rem 1.25rem;
+				background: var(--night);
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--cream);
+				transition: background 0.2s;
+			}
+			.q-send:hover {
+				background: #2a2420;
+			}
+			.q-send:disabled {
+				opacity: 0.4;
+				cursor: not-allowed;
+			}
+			.q-skip {
+				background: none;
+				border: none;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.8125rem;
+				font-weight: 400;
+				color: var(--muted);
+			}
+			.q-skip:hover {
+				color: var(--warm);
+			}
+			.q-thanks {
+				display: none;
+				text-align: center;
+				padding: 0.75rem 0;
+			}
+			.q-thanks.on {
+				display: block;
+			}
+			.q-form.off {
+				display: none;
+			}
+			.thx-t {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1rem;
+				color: var(--warm);
+			}
+
+			.explainer {
+				max-width: 500px;
+				margin: 0 auto;
+				padding: 2.5rem 1.5rem 1rem;
+				text-align: center;
+			}
+			.explainer-declare {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.25rem;
+				color: var(--night);
+				margin-bottom: 1rem;
+				line-height: 1.35;
+			}
+			.explainer-p {
+				font-size: 1rem;
+				font-weight: 300;
+				color: var(--warm);
+				max-width: 420px;
+				margin: 0 auto;
+				line-height: 1.7;
+			}
+			.explainer-p strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+
+			.sec {
+				max-width: 500px;
+				margin: 0 auto;
+				padding: 2.5rem 1.5rem;
+				text-align: center;
+			}
+			.rule {
+				width: 36px;
+				height: 1px;
+				background: var(--border);
+				margin: 0 auto 2rem;
+			}
+			.sec-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.25rem;
+				color: var(--night);
+				margin-bottom: 1.25rem;
+				line-height: 1.4;
+			}
+			.sec-p {
+				font-size: 1rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.75;
+				margin-bottom: 1rem;
+			}
+			.sec-p strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+
+			/* ── Relief list ── */
+			.relief-section {
+				max-width: 500px;
+				margin: 0 auto;
+				padding: 1rem 1.5rem 2.5rem;
+				text-align: center;
+			}
+			.relief-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.25rem;
+				color: var(--night);
+				margin-bottom: 1.25rem;
+				line-height: 1.4;
+			}
+			.relief-items {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				max-width: 380px;
+				margin: 0 auto 1.25rem;
+			}
+			.relief-item {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.625rem 1rem;
+				background: var(--surface);
+				border-radius: 10px;
+				text-align: left;
+			}
+			.relief-x {
+				font-size: 0.75rem;
+				color: var(--ember);
+				flex-shrink: 0;
+				width: 20px;
+				text-align: center;
+				font-weight: 400;
+			}
+			.relief-item span {
+				font-size: 0.9375rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.5;
+			}
+			.relief-coda {
+				font-size: 0.9375rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.6;
+				max-width: 360px;
+				margin: 0 auto;
+			}
+			.relief-coda strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+
+			.peek {
+				max-width: 700px;
+				margin: 0 auto;
+				padding: 1.5rem 0 3rem;
+				text-align: center;
+				overflow: hidden;
+			}
+			.peek-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.125rem;
+				color: var(--night);
+				margin-bottom: 0.375rem;
+				line-height: 1.4;
+				padding: 0 1.5rem;
+			}
+			.peek-sub {
+				font-size: 0.875rem;
+				font-weight: 300;
+				color: var(--muted);
+				margin-bottom: 1.75rem;
+				padding: 0 1.5rem;
+			}
+			.phone-track {
+				display: flex;
+				gap: 1rem;
+				overflow-x: auto;
+				scroll-snap-type: x mandatory;
+				-webkit-overflow-scrolling: touch;
+				padding: 0.5rem 1.5rem 1.5rem;
+				padding-right: 4rem;
+				scrollbar-width: none;
+			}
+			.phone-track::-webkit-scrollbar {
+				display: none;
+			}
+			.device {
+				flex: 0 0 232px;
+				scroll-snap-align: center;
+				background: #1a1612;
+				border-radius: 32px;
+				border: 3px solid #2a2420;
+				position: relative;
+				overflow: hidden;
+				box-shadow:
+					0 2px 8px rgba(20, 16, 13, 0.1),
+					0 12px 40px rgba(20, 16, 13, 0.15),
+					inset 0 1px 0 rgba(255, 255, 255, 0.03);
+			}
+			.island {
+				width: 72px;
+				height: 18px;
+				margin: 10px auto 0;
+				background: #0a0806;
+				border-radius: 12px;
+				position: relative;
+				z-index: 2;
+			}
+			.screen {
+				background: #14100d;
+				margin: 6px;
+				border-radius: 26px;
+				padding: 1.75rem 1.125rem 1.5rem;
+				min-height: 320px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				position: relative;
+			}
+			.ph-orb {
+				width: 44px;
+				height: 44px;
+				margin: 0.25rem auto 1.25rem;
+				border-radius: 50%;
+				position: relative;
+			}
+			.ph-orb-glow {
+				position: absolute;
+				inset: -40%;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle,
+					rgba(196, 112, 63, 0.08) 0%,
+					transparent 70%
+				);
+				animation: pulse 7s ease-in-out infinite;
+			}
+			.ph-orb-core {
+				position: absolute;
+				inset: 0;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle at 44% 40%,
+					rgba(196, 112, 63, 0.15) 0%,
+					rgba(196, 112, 63, 0.32) 40%,
+					rgba(196, 112, 63, 0.06) 70%,
+					transparent 100%
+				);
+				animation: pulse 7s ease-in-out infinite;
+			}
+			.ph-title {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.0625rem;
+				color: #fdfbf8;
+				margin-bottom: 0.375rem;
+				line-height: 1.35;
+			}
+			.ph-sub {
+				font-size: 0.75rem;
+				font-weight: 300;
+				color: #8a8279;
+				line-height: 1.5;
+				margin-bottom: 1.5rem;
+			}
+			.ph-bars {
+				width: 100%;
+				padding: 0 0.25rem;
+			}
+			.ph-bar {
+				height: 9px;
+				border-radius: 6px;
+				margin-bottom: 0.5rem;
+			}
+			.b1 {
+				background: rgba(196, 112, 63, 0.12);
+				width: 80%;
+			}
+			.b2 {
+				background: rgba(255, 255, 255, 0.05);
+				width: 65%;
+			}
+			.b3 {
+				background: rgba(255, 255, 255, 0.03);
+				width: 50%;
+			}
+			.b4 {
+				background: rgba(255, 255, 255, 0.02);
+				width: 35%;
+			}
+			.ph-label {
+				font-family: "Space Mono", monospace;
+				font-size: 0.5625rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: rgba(196, 112, 63, 0.6);
+				margin-bottom: 1rem;
+				margin-top: 0.25rem;
+			}
+			.ph-insight {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: #e8e2d9;
+				line-height: 1.6;
+				margin-bottom: 1.25rem;
+				text-align: left;
+				padding: 0 0.125rem;
+			}
+			.ph-insight strong {
+				font-weight: 400;
+				color: #fdfbf8;
+			}
+			.ph-redact {
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+				width: 100%;
+				padding: 0.75rem;
+				background: rgba(255, 255, 255, 0.015);
+			}
+			.ph-redact::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to bottom, transparent 0%, #14100d 75%);
+			}
+			.rl {
+				height: 7px;
+				border-radius: 4px;
+				margin-bottom: 0.375rem;
+			}
+			.rl1 {
+				background: rgba(255, 255, 255, 0.06);
+				width: 92%;
+			}
+			.rl2 {
+				background: rgba(255, 255, 255, 0.04);
+				width: 68%;
+			}
+			.rl3 {
+				background: rgba(255, 255, 255, 0.035);
+				width: 78%;
+			}
+			.rl4 {
+				background: rgba(255, 255, 255, 0.025);
+				width: 52%;
+			}
+			.rl5 {
+				background: rgba(255, 255, 255, 0.02);
+				width: 60%;
+			}
+			.ph-lock {
+				width: 36px;
+				height: 36px;
+				margin: 1.5rem auto 1.25rem;
+				border: 1.5px solid rgba(196, 112, 63, 0.2);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.ph-lock-icon {
+				width: 14px;
+				height: 14px;
+				position: relative;
+			}
+			.ph-lock-icon::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 2px;
+				width: 10px;
+				height: 7px;
+				border: 1.5px solid rgba(196, 112, 63, 0.35);
+				border-bottom: none;
+				border-radius: 6px 6px 0 0;
+			}
+			.ph-lock-icon::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 14px;
+				height: 9px;
+				background: rgba(196, 112, 63, 0.2);
+				border-radius: 2px;
+			}
+			.ph-more-title {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1rem;
+				color: #fdfbf8;
+				margin-bottom: 0.375rem;
+			}
+			.ph-more-sub {
+				font-size: 0.75rem;
+				font-weight: 300;
+				color: #8a8279;
+				line-height: 1.5;
+				margin-bottom: 1.5rem;
+				max-width: 160px;
+			}
+			.ph-more-bars {
+				width: 100%;
+				padding: 0 0.25rem;
+				opacity: 0.4;
+			}
+
+			.peek-dots {
+				display: flex;
+				gap: 6px;
+				justify-content: center;
+				margin-top: 1rem;
+			}
+			.dot {
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: var(--border);
+				transition:
+					background 0.3s,
+					width 0.3s;
+			}
+			.dot.active {
+				background: var(--ember);
+				width: 16px;
+				border-radius: 3px;
+			}
+			.peek-caption {
+				margin-top: 1.5rem;
+				padding: 0 1.5rem;
+				font-size: 0.9375rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.55;
+				max-width: 400px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.peek-caption strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+
+			@media (min-width: 760px) {
+				.phone-track {
+					justify-content: center;
+					overflow: visible;
+					padding: 0.5rem 0 1.5rem;
+					padding-right: 0;
+				}
+				.device {
+					flex: 0 0 220px;
+				}
+				.screen {
+					min-height: 320px;
+					padding: 1.5rem 1rem 1.25rem;
+				}
+				.peek-dots {
+					display: none;
+				}
+			}
+
+			.fit-section {
+				max-width: 500px;
+				margin: 0 auto;
+				padding: 1rem 1.5rem 3rem;
+				text-align: center;
+			}
+			.fit-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.25rem;
+				color: var(--night);
+				margin-bottom: 1.5rem;
+				line-height: 1.4;
+			}
+			.fit-card {
+				text-align: left;
+				background: var(--surface);
+				border-radius: 12px;
+				padding: 1.25rem 1.375rem;
+				margin-bottom: 0.75rem;
+			}
+			.fit-card p {
+				font-size: 0.9375rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.65;
+			}
+			.fit-card p strong {
+				font-weight: 400;
+				color: var(--night);
+			}
+			.not-card {
+				text-align: left;
+				border-radius: 12px;
+				padding: 1rem 1.375rem;
+				border: 1.5px solid var(--border);
+			}
+			.not-card p {
+				font-size: 0.875rem;
+				font-weight: 300;
+				color: var(--muted);
+				line-height: 1.6;
+			}
+
+			.founder-note {
+				max-width: 420px;
+				margin: 0 auto;
+				padding: 0 1.5rem 1.5rem;
+				text-align: center;
+			}
+			.fn-inner {
+				background: var(--surface);
+				border-radius: 12px;
+				padding: 1.375rem;
+			}
+			.fn-q {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1rem;
+				color: var(--night);
+				line-height: 1.55;
+				margin-bottom: 0.75rem;
+			}
+			.fn-attr {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--muted);
+			}
+			.fn-attr strong {
+				font-weight: 400;
+				color: var(--warm);
+			}
+
+			.trust-bar {
+				max-width: 420px;
+				margin: 0 auto;
+				padding: 0 1.5rem 2.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 1.5rem;
+				flex-wrap: wrap;
+			}
+			.trust-item {
+				font-family: "Space Mono", monospace;
+				font-size: 0.625rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--muted);
+				display: flex;
+				align-items: center;
+				gap: 0.375rem;
+			}
+			.trust-item .t-icon {
+				width: 14px;
+				height: 14px;
+				border-radius: 50%;
+				border: 1px solid var(--border);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.5rem;
+				color: var(--warm);
+				font-style: normal;
+			}
+
+			.launch-banner {
+				max-width: 420px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+				text-align: center;
+			}
+			.lb-inner {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.5rem 1rem;
+				border-radius: 100px;
+				border: 1px solid var(--border);
+			}
+			.lb-inner span {
+				font-family: "Space Mono", monospace;
+				font-size: 0.6875rem;
+				letter-spacing: 0.04em;
+				color: var(--warm);
+			}
+
+			.cta-bottom {
+				max-width: 420px;
+				margin: 0 auto;
+				padding: 0 1.5rem 2rem;
+				text-align: center;
+			}
+			.cta-bottom-h {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.125rem;
+				color: var(--night);
+				margin-bottom: 0.25rem;
+			}
+			.cta-bottom-p {
+				font-size: 0.875rem;
+				font-weight: 300;
+				color: var(--muted);
+				margin-bottom: 1.25rem;
+			}
+			.cta-bottom .scarcity {
+				margin-top: 0.75rem;
+			}
+			.post {
+				display: none;
+				text-align: center;
+			}
+			.post.on {
+				display: block;
+			}
+
+			.sticky-bar {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+				background: rgba(253, 251, 248, 0.92);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+				border-top: 1px solid var(--border);
+				padding: 0.75rem 1.25rem;
+				transform: translateY(100%);
+				transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			.sticky-bar.show {
+				transform: translateY(0);
+			}
+			.sticky-bar.hide-final {
+				transform: translateY(100%) !important;
+			}
+			.sticky-inner {
+				max-width: 420px;
+				margin: 0 auto;
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
+			}
+			.sticky-inner .em-in {
+				flex: 1;
+				padding: 0.75rem 0.875rem;
+				background: var(--white);
+				border: 1.5px solid var(--border);
+				border-radius: 8px;
+				font-family: inherit;
+				font-size: 0.875rem;
+				font-weight: 400;
+				color: var(--night);
+				outline: none;
+				min-width: 0;
+			}
+			.sticky-inner .em-in::placeholder {
+				color: var(--muted);
+				font-weight: 300;
+			}
+			.sticky-inner .em-in:focus {
+				border-color: rgba(196, 112, 63, 0.45);
+			}
+			.sticky-inner .join-btn {
+				border-radius: 8px;
+				padding: 0.75rem 1.125rem;
+				font-size: 0.8125rem;
+			}
+
+			.share-btns {
+				display: flex;
+				gap: 0.5rem;
+				margin-top: 0.75rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+			.share-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.375rem;
+				padding: 0.5rem 0.875rem;
+				border-radius: 8px;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.75rem;
+				font-weight: 400;
+				color: var(--warm);
+				transition:
+					border-color 0.2s,
+					color 0.2s;
+				text-decoration: none;
+			}
+			.share-btn:hover {
+				border-color: rgba(196, 112, 63, 0.35);
+				color: var(--night);
+			}
+
+			.social-proof {
+				max-width: 420px;
+				margin: 0 auto;
+				padding: 0 1.5rem 1rem;
+				text-align: center;
+			}
+			.sp-quotes {
+				display: flex;
+				flex-direction: column;
+				gap: 0.625rem;
+			}
+			.sp-quote {
+				background: var(--surface);
+				border-radius: 10px;
+				padding: 0.875rem 1rem;
+				text-align: left;
+			}
+			.sp-quote p {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.55;
+				font-style: italic;
+			}
+			.sp-quote .sp-attr {
+				font-style: normal;
+				font-size: 0.6875rem;
+				color: var(--muted);
+				margin-top: 0.375rem;
+			}
+			.sp-label {
+				font-family: "Space Mono", monospace;
+				font-size: 0.625rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--muted);
+				margin-bottom: 0.75rem;
+			}
+
+			.milestones {
+				display: flex;
+				gap: 0.375rem;
+				margin-top: 0.75rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+			.milestone {
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+				padding: 0.375rem 0.625rem;
+				border-radius: 100px;
+				background: var(--surface);
+				font-size: 0.6875rem;
+				color: var(--muted);
+			}
+			.milestone strong {
+				font-weight: 400;
+				color: var(--warm);
+			}
+
+			.terms-row {
+				display: flex;
+				align-items: flex-start;
+				gap: 0.5rem;
+				margin-top: 0.5rem;
+				text-align: left;
+			}
+			.terms-cb {
+				width: 16px;
+				height: 16px;
+				margin-top: 2px;
+				flex-shrink: 0;
+				accent-color: var(--ember);
+				cursor: pointer;
+			}
+			.terms-label {
+				font-size: 0.75rem;
+				font-weight: 300;
+				color: var(--muted);
+				line-height: 1.45;
+			}
+			.terms-link {
+				color: var(--ember);
+				text-decoration: underline;
+				cursor: pointer;
+				background: none;
+				border: none;
+				font: inherit;
+				font-size: inherit;
+				font-weight: 400;
+				padding: 0;
+			}
+			.terms-link:hover {
+				color: var(--night);
+			}
+			.terms-row.shake {
+				animation: shake 0.4s ease;
+			}
+			@keyframes shake {
+				0%,
+				100% {
+					transform: translateX(0);
+				}
+				20%,
+				60% {
+					transform: translateX(-4px);
+				}
+				40%,
+				80% {
+					transform: translateX(4px);
+				}
+			}
+
+			.terms-overlay {
+				position: fixed;
+				inset: 0;
+				z-index: 200;
+				background: rgba(20, 16, 13, 0.5);
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				display: none;
+				align-items: center;
+				justify-content: center;
+				padding: 1rem;
+			}
+			.terms-overlay.open {
+				display: flex;
+			}
+			.terms-modal {
+				background: var(--cream);
+				border-radius: 16px;
+				max-width: 600px;
+				width: 100%;
+				max-height: 85vh;
+				display: flex;
+				flex-direction: column;
+				box-shadow: 0 8px 40px rgba(20, 16, 13, 0.2);
+			}
+			.terms-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 1.25rem 1.5rem;
+				border-bottom: 1px solid var(--border);
+				flex-shrink: 0;
+			}
+			.terms-header h2 {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.25rem;
+				color: var(--night);
+			}
+			.terms-close {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				border: 1.5px solid var(--border);
+				background: var(--white);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1rem;
+				color: var(--warm);
+				transition: border-color 0.2s;
+			}
+			.terms-close:hover {
+				border-color: var(--ember);
+			}
+			.terms-body {
+				overflow-y: auto;
+				padding: 1.5rem;
+				-webkit-overflow-scrolling: touch;
+			}
+			.terms-body h3 {
+				font-family: "Fraunces", Georgia, serif;
+				font-style: italic;
+				font-weight: 300;
+				font-size: 1.0625rem;
+				color: var(--night);
+				margin: 1.5rem 0 0.5rem;
+				line-height: 1.35;
+			}
+			.terms-body h3:first-child {
+				margin-top: 0;
+			}
+			.terms-body p {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.7;
+				margin-bottom: 0.75rem;
+			}
+			.terms-body ul {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				color: var(--warm);
+				line-height: 1.7;
+				margin: 0 0 0.75rem 1.25rem;
+				padding: 0;
+			}
+			.terms-body ul li {
+				margin-bottom: 0.25rem;
+			}
+			.terms-footer {
+				padding: 1rem 1.5rem;
+				border-top: 1px solid var(--border);
+				flex-shrink: 0;
+				text-align: center;
+			}
+			.terms-accept {
+				padding: 0.75rem 2rem;
+				background: var(--night);
+				border: none;
+				border-radius: 10px;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.875rem;
+				font-weight: 500;
+				color: var(--cream);
+				transition: background 0.2s;
+			}
+			.terms-accept:hover {
+				background: #2a2420;
+			}
+
+			@media (max-width: 480px) {
+				.terms-modal {
+					max-height: 92vh;
+					border-radius: 12px;
+				}
+				.terms-body {
+					padding: 1.25rem;
+				}
+			}
+
+			.foot {
+				padding: 3rem 1.5rem 5rem;
+				text-align: center;
+			}
+			.foot-t {
+				font-family: "Space Mono", monospace;
+				font-size: 0.625rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--muted);
+			}
+			.foot-local {
+				font-size: 0.8125rem;
+				font-weight: 300;
+				font-style: italic;
+				color: var(--muted);
+				margin-bottom: 0.75rem;
+				line-height: 1.5;
+			}
+
+			.rv {
+				opacity: 0;
+				transform: translateY(14px);
+				transition:
+					opacity 0.6s ease,
+					transform 0.6s ease;
+			}
+			.rv.v {
+				opacity: 1;
+				transform: none;
+			}
+			.en {
+				opacity: 0;
+				transform: translateY(8px);
+				animation: up 0.7s ease forwards;
+			}
+			.d1 {
+				animation-delay: 0.06s;
+			}
+			.d2 {
+				animation-delay: 0.14s;
+			}
+			.d3 {
+				animation-delay: 0.22s;
+			}
+			.d4 {
+				animation-delay: 0.3s;
+			}
+			.d5 {
+				animation-delay: 0.38s;
+			}
+			@keyframes up {
+				to {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				* {
+					animation: none !important;
+					transition: none !important;
+				}
+				.en,
+				.rv {
+					opacity: 1;
+					transform: none;
+				}
+				.orb-g,
+				.orb-c {
+					animation: none;
+					opacity: 0.85;
+				}
+				.sticky-bar {
+					transform: none;
+				}
+			}
+			@media (max-width: 480px) {
+				.hero {
+					padding: 1.5rem 1.25rem 1rem;
+				}
+				.orb-w {
+					width: 48px;
+					height: 48px;
+					margin-bottom: 1rem;
+				}
+				.sec,
+				.fit-section,
+				.relief-section {
+					padding-left: 1.25rem;
+					padding-right: 1.25rem;
+				}
+				.share-box,
+				.q-box {
+					padding: 1rem;
+				}
+				.ref-step {
+					padding: 0.75rem 0.5rem;
+				}
+				.trust-bar {
+					gap: 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="topbar en d1"><span class="wordmark">Maren</span></div>
+
+		<!-- ════════ HERO ════════ -->
+		<section class="hero" id="heroSection">
+			<div class="orb-w en d2">
+				<div class="orb-g"></div>
+				<div class="orb-c"></div>
+			</div>
+
+			<h1 class="hero-h en d3">
+				What if you didn't have to search for the right person?
+			</h1>
+
+			<p class="hero-p en d4">
+				Maren gets to know you, what you actually want, what hasn't worked, what you're done settling for. Then she finds one person she thinks you should meet, and tells you exactly why.
+			</p>
+
+			<div class="form-wrap en d5">
+				<div class="step-progress" id="stepProgress">
+					<div class="sp-dot current" data-step="1"></div>
+					<div class="sp-dot" data-step="2"></div>
+					<div class="sp-dot" data-step="3"></div>
+				</div>
+
+				<!-- ══ STEP 1: Email + City ══ -->
+				<div class="step active" id="step1">
+					<div class="inline-btn">
+						<input
+							type="email"
+							id="emailIn"
+							class="em-in"
+							placeholder="your email"
+							autocomplete="email"
+							aria-label="Email address"
+						/>
+						<button type="button" class="join-btn" id="joinBtn">
+							Get early access
+						</button>
+					</div>
+					<div class="field-row" style="margin-top: 0.5rem">
+						<input
+							type="text"
+							id="cityIn"
+							class="field-in"
+							placeholder="your city (optional)"
+							autocomplete="address-level2"
+							aria-label="City"
+						/>
+					</div>
+					<div class="terms-row" id="termsRow1">
+						<input
+							type="checkbox"
+							id="termsCb1"
+							class="terms-cb"
+							aria-label="Agree to Terms of Use"
+						/>
+						<label class="terms-label" for="termsCb1">
+							I agree to the
+							<button type="button" class="terms-link" data-terms>
+								Terms of Use
+							</button>
+							<label class="terms-label" for="termsCb1">
+								and understand that Maren will contact me about the product.
+							</label>
+						</label>
+					</div>
+					<p class="form-msg" id="msg">&nbsp;</p>
+
+					<div class="scarcity" id="scarcity1" hidden>
+						<div class="scarcity-label">
+							<span class="scarcity-count"
+								><strong id="totalCount">—</strong> on the waitlist</span
+							>
+							<span class="scarcity-cap">5,000 spots in Charlotte</span>
+						</div>
+						<div class="bar-track">
+							<div class="bar-fill" id="barFill" style="width: 0%"></div>
+						</div>
+					</div>
+
+					<div class="velocity-badge" id="velocityBadge" hidden>
+						<span class="velocity-dot"></span>
+						<span id="velocityText"></span>
+					</div>
+				</div>
+
+				<!-- ══ STEP 2: Qualifying question ══ -->
+				<div class="step" id="step2">
+					<p class="step-label">One quick question.</p>
+					<p class="step-sub">
+						What's the most frustrating thing about dating apps?
+					</p>
+
+					<div class="q-chips" id="qChips">
+						<button type="button" class="q-chip" data-val="Too many bad matches">
+							Too many bad matches
+						</button>
+						<button type="button" class="q-chip" data-val="Conversations go nowhere">
+							Conversations go nowhere
+						</button>
+						<button type="button" class="q-chip" data-val="It feels like a chore">
+							Feels like a chore
+						</button>
+						<button type="button" class="q-chip" data-val="People aren't serious">
+							People aren't serious
+						</button>
+					</div>
+					<textarea
+						id="qCustom"
+						class="q-custom"
+						placeholder="Or tell us in your own words..."
+						maxlength="200"
+					></textarea>
+					<button type="button" class="next-btn" id="step2Btn">Continue</button>
+				</div>
+
+				<!-- ══ STEP 3: Phone (optional) ══ -->
+				<div class="step" id="step3">
+					<p class="step-label">Want a text when it's your turn?</p>
+					<p class="step-sub">
+						We'll send one message. No spam, no newsletters. Just "you're in."
+					</p>
+
+					<div class="phone-row">
+						<span class="phone-flag">🇺🇸</span>
+						<input
+							type="tel"
+							id="phoneIn"
+							class="phone-in"
+							placeholder="(555) 000-0000"
+							autocomplete="tel"
+							aria-label="Phone number"
+						/>
+					</div>
+					<p class="phone-note">SMS only. We'll never share your number.</p>
+
+					<button type="button" class="next-btn" id="step3Btn">
+						Get early access
+					</button>
+					<button
+						type="button"
+						class="next-btn"
+						id="skipPhone"
+						style="
+							background: transparent;
+							color: var(--warm);
+							border: 1.5px solid var(--border);
+							margin-top: 0.5rem;
+						"
+					>
+						Continue with email only
+					</button>
+				</div>
+
+				<!-- ══ STEP 4: Success ══ -->
+				<div class="step" id="step4">
+					<div class="badge" id="posBadge"></div>
+					<h2 class="suc-h">You're in.</h2>
+					<p class="suc-p">
+						We'll reach out when it's your turn. The earlier you joined, the
+						sooner you get in.
+					</p>
+
+					<div class="share-box">
+						<p class="share-label">Move up the line.</p>
+						<p class="share-sub">
+							Every friend who joins bumps you closer to the front.
+						</p>
+						<div class="share-row">
+							<input
+								type="text"
+								class="share-link"
+								id="shareLink"
+								value=""
+								readonly
+							/>
+							<button type="button" class="copy-btn" id="copyBtn">Copy</button>
+						</div>
+						<p class="ref-count" id="refCount" hidden></p>
+
+						<div class="share-btns">
+							<a class="share-btn" id="shareText" href="#" target="_blank">💬 iMessage</a>
+							<a class="share-btn" id="shareX" href="#" target="_blank">𝕏 Post</a>
+							<a class="share-btn" id="shareWA" href="#" target="_blank">WhatsApp</a>
+						</div>
+
+						<div class="milestones">
+							<span class="milestone"><strong>3 refs</strong> → priority access</span>
+							<span class="milestone"><strong>5 refs</strong> → early invite</span>
+							<span class="milestone"><strong>10 refs</strong> → founding member</span>
+						</div>
+					</div>
+
+					<div class="ref-steps">
+						<div class="ref-step">
+							<div class="ref-icon">🔗</div>
+							<strong>Share your link</strong>
+							<p>Send it to someone who deserves better dates</p>
+						</div>
+						<div class="ref-step">
+							<div class="ref-icon">✓</div>
+							<strong>They join</strong>
+							<p>You both move up the waitlist</p>
+						</div>
+						<div class="ref-step">
+							<div class="ref-icon">🔑</div>
+							<strong>Get in sooner</strong>
+							<p>Top referrers get earliest access</p>
+						</div>
+					</div>
+
+					<div class="q-box">
+						<div class="q-form" id="qForm">
+							<p class="q-box-label">
+								If you could build the perfect way to find the right person,
+								what would it do differently?
+							</p>
+							<p class="q-box-opt">Totally optional. But we're listening.</p>
+							<textarea
+								id="qTa"
+								class="q-ta"
+								placeholder="Whatever comes to mind..."
+								maxlength="600"
+							></textarea>
+							<div class="q-acts">
+								<button type="button" class="q-send" id="qSend">Share</button>
+								<button type="button" class="q-skip" id="qSkip">Skip</button>
+							</div>
+						</div>
+						<div class="q-thanks" id="qThanks">
+							<p class="thx-t" id="thxMsg">Noted. That actually helps.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ════════ EXPLAINER — 3-beat experience ════════ -->
+		<section class="explainer rv" data-sec="explainer">
+			<p class="explainer-declare">Here's what changes.</p>
+			<p class="explainer-p" style="margin-bottom: 1rem">
+				You don't build a profile. You have a conversation. 
+         Maren asks you real questions, not "what are your hobbies" but the stuff that actually matters when you're sitting across from someone.
+			</p>
+			<p class="explainer-p" style="margin-bottom: 1rem">
+				Then she goes quiet. You don't browse. You don't swipe. You don't manage six half-dead conversations with strangers.
+			</p>
+			<p class="explainer-p">
+				When she finds someone, she comes back with <strong>one name and one reason.</strong> Not "you both like hiking." A real reason. The kind that makes you think — okay, I'd want to meet this person. And if it's not right, she learns from that too. <strong>The longer you're with Maren, the better she knows what right looks like for you.</strong>
+			</p>
+		</section>
+
+		<!-- ════════ FOUNDER NOTE ════════ -->
+		<section
+			class="founder-note rv"
+			data-sec="founder-top"
+			style="padding-top: 0.5rem"
+		>
+			<div class="fn-inner">
+				<p class="fn-q">
+					"I built Maren because I watched good people waste years on apps that
+					were never designed to help them find someone. The business model was
+					attention, not outcomes. I wanted to build the opposite."
+				</p>
+				<p class="fn-attr"><strong>— Soufi</strong>, building Maren solo in Charlotte. Because someone should.</p>
+			</div>
+		</section>
+
+		<!-- ════════ SOCIAL PROOF ════════ -->
+		<section class="social-proof rv" data-sec="social-proof">
+			<p class="sp-label">What people keep telling us</p>
+			<div class="sp-quotes">
+				<div class="sp-quote">
+					<p>
+						"I've been saying this for years, just pick for me. I don't want to browse, I don't want to choose from a grid. I just want someone to say 'trust me, meet this person.'"
+					</p>
+					<div class="sp-attr">— Waitlist member, Charlotte</div>
+				</div>
+				<div class="sp-quote">
+					<p>
+						"The part about telling you WHY you should meet someone. That's the thing. Every app shows you a face and says good luck. This actually explains the reason."
+					</p>
+					<div class="sp-attr">— Waitlist member, Charlotte</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ════════ PAIN — gut punch ════════ -->
+		<section class="sec">
+			<div class="rule rv"></div>
+			<h2 class="sec-h rv" data-sec="pain">
+				You already know this part.
+			</h2>
+			<p class="sec-p rv">
+				You download the app. You build the profile. You pick photos that feel like a performance. You swipe until your thumb goes numb. You match with someone. You write something clever. They never respond. Or they do, and it goes nowhere. Or it goes somewhere, and the person you meet looks nothing like the person you imagined.
+			</p>
+			<p class="sec-p rv">
+				You do this for months. Maybe years. And at some point you stop blaming yourself and start wondering, <strong>what if this whole thing was never designed to actually work?</strong>
+			</p>
+			<p class="sec-p rv">
+				It wasn't. Dating apps make money when you keep coming back. <strong>Maren only works if you stop needing her.</strong>
+			</p>
+		</section>
+
+		<!-- ════════ RELIEF — what disappears ════════ -->
+		<section class="relief-section rv" data-sec="relief">
+			<h2 class="relief-h">Things you're never doing again.</h2>
+			<div class="relief-items">
+				<div class="relief-item">
+					<span class="relief-x">✕</span>
+					<span>Swiping through strangers</span>
+				</div>
+				<div class="relief-item">
+					<span class="relief-x">✕</span>
+					<span>Writing openers that get ignored</span>
+				</div>
+				<div class="relief-item">
+					<span class="relief-x">✕</span>
+					<span>Managing five dead conversations</span>
+				</div>
+				<div class="relief-item">
+					<span class="relief-x">✕</span>
+					<span>Wondering if someone's actually serious</span>
+				</div>
+				<div class="relief-item">
+					<span class="relief-x">✕</span>
+					<span>Performing for an algorithm</span>
+				</div>
+			</div>
+			<p class="relief-coda">
+				<strong>You open Maren when she has someone for you.</strong> That's it.
+			</p>
+		</section>
+
+		<!-- ════════ PHONE PREVIEWS ════════ -->
+		<section class="peek">
+			<h2 class="peek-h rv" data-sec="preview">A glimpse of what it feels like.</h2>
+			<p class="peek-sub rv">
+				This is what it looks like when someone finds the right person for you.
+			</p>
+			<div class="phone-track rv" id="phoneTrack">
+				<div class="device">
+					<div class="island"></div>
+					<div class="screen">
+						<div class="ph-orb">
+							<div class="ph-orb-glow"></div>
+							<div class="ph-orb-core"></div>
+						</div>
+						<p class="ph-title">I found someone.</p>
+						<p class="ph-sub">Someone I think you need to meet.</p>
+						<div class="ph-bars">
+							<div class="ph-bar b1"></div>
+							<div class="ph-bar b2"></div>
+							<div class="ph-bar b3"></div>
+							<div class="ph-bar b4"></div>
+						</div>
+					</div>
+				</div>
+				<div class="device">
+					<div class="island"></div>
+					<div class="screen">
+						<p class="ph-label">Why you two</p>
+						<p class="ph-insight">
+							<strong
+								>When things get tense, you both pull back instead of
+								pushing.</strong
+							>
+							Then you come back. I matched you on that before anything else.
+						</p>
+						<div class="ph-redact">
+							<div class="rl rl1"></div>
+							<div class="rl rl2"></div>
+							<div class="rl rl3"></div>
+							<div class="rl rl4"></div>
+							<div class="rl rl5"></div>
+						</div>
+					</div>
+				</div>
+				<div class="device">
+					<div class="island"></div>
+					<div class="screen">
+						<div class="ph-lock"><div class="ph-lock-icon"></div></div>
+						<p class="ph-more-title">There's more.</p>
+						<p class="ph-more-sub">
+							A lot more. This is just the beginning of how Maren introduces
+							you.
+						</p>
+						<div class="ph-more-bars">
+							<div class="ph-bar b1"></div>
+							<div class="ph-bar b2"></div>
+							<div class="ph-bar b3"></div>
+							<div class="ph-bar b4"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="peek-dots" id="peekDots">
+				<div class="dot active"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+			<p class="peek-caption rv">
+				<strong>This is what your first match looks like.</strong> Join the list
+				to see who it is.
+			</p>
+		</section>
+
+		<!-- ════════ FIT SECTION — recognition pattern ════════ -->
+		<section class="fit-section">
+			<h2 class="fit-h rv" data-sec="fit">This is for you if…</h2>
+			<div class="fit-card rv">
+				<p>
+					You've deleted a dating app at least once and came back because you didn't have a better option. <strong>You're good at your life</strong>, your job, your friendships, your routine and you can't figure out why finding one person feels like the hardest thing you do. You'd rather meet one person who actually makes sense than scroll through a hundred who don't. <strong>You don't need more options. You need someone to find the right one.</strong>
+				</p>
+			</div>
+			<div class="not-card rv">
+				<p>
+					If you want to browse hundreds of profiles on a Friday night, that's not what Maren does. And that's okay.
+				</p>
+			</div>
+		</section>
+
+		<!-- ════════ FOUNDER NOTE (bottom) ════════ -->
+		<section class="founder-note rv" data-sec="founder">
+			<div class="fn-inner">
+				<p class="fn-q">"Outcomes over attention. That's the whole idea."</p>
+				<p class="fn-attr"><strong>— Soufi</strong>, founder · Charlotte, NC</p>
+			</div>
+		</section>
+
+		<!-- ════════ TRUST BAR ════════ -->
+		<div class="trust-bar rv" data-sec="trust">
+			<span class="trust-item"
+				><span class="t-icon">✦</span> Solo-built in Charlotte</span
+			>
+			<span class="trust-item"
+				><span class="t-icon">◉</span> AI-powered matching</span
+			>
+			<span class="trust-item"
+				><span class="t-icon">♡</span> Outcomes over attention</span
+			>
+		</div>
+
+		<!-- ════════ LAUNCH BANNER ════════ -->
+		<div
+			class="launch-banner rv"
+			style="padding-top: 0.5rem; padding-bottom: 2rem"
+		>
+			<div class="lb-inner"><span>Charlotte beta opens Fall 2026</span></div>
+		</div>
+
+		<!-- ════════ BOTTOM CTA ════════ -->
+		<section class="cta-bottom rv" data-sec="cta_bottom">
+			<h2 class="cta-bottom-h">The list is moving.</h2>
+			<p class="cta-bottom-p">
+				First 5,000 get early access. After that, there's a real line.
+			</p>
+
+			<div id="formLive2">
+				<div class="inline-btn">
+					<input
+						type="email"
+						id="emailIn2"
+						class="em-in"
+						placeholder="your email"
+						autocomplete="email"
+						aria-label="Email address"
+					/>
+					<button type="button" class="join-btn" id="joinBtn2">
+						Get early access
+					</button>
+				</div>
+				<div class="terms-row" id="termsRow2" style="margin-top: 0.375rem">
+					<input
+						type="checkbox"
+						id="termsCb2"
+						class="terms-cb"
+						aria-label="Agree to Terms of Use"
+					/>
+					<label class="terms-label" for="termsCb2"
+						>I agree to the
+						<button type="button" class="terms-link" data-terms>
+							Terms of Use</button
+						><label>
+							and understand that Maren will contact me about the product.
+						</label></label
+					>
+				</div>
+				<p class="form-msg" id="msg2">&nbsp;</p>
+				<div class="scarcity" id="scarcity2" style="margin-top: 0.75rem" hidden>
+					<div class="scarcity-label">
+						<span class="scarcity-count"
+							><strong id="totalCount2">—</strong> on the waitlist</span
+						>
+						<span class="scarcity-cap">5,000 spots</span>
+					</div>
+					<div class="bar-track">
+						<div class="bar-fill" id="barFill2" style="width: 0%"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer class="foot">
+			<p class="foot-local">Built in Charlotte. This is where it starts.</p>
+			<p class="foot-t">Maren · Charlotte, NC · Fall 2026</p>
+		</footer>
+
+		<!-- ── Sticky bar ── -->
+		<div class="sticky-bar" id="stickyBar">
+			<div class="sticky-inner">
+				<input
+					type="email"
+					id="stickyEmail"
+					class="em-in"
+					placeholder="your email"
+					autocomplete="email"
+					aria-label="Email address"
+				/>
+				<button type="button" class="join-btn" id="stickyBtn">
+					Get early access
+				</button>
+			</div>
+		</div>
+
+		<!-- ════════ TERMS OF USE MODAL ════════ -->
+		<div class="terms-overlay" id="termsOverlay">
+			<div class="terms-modal">
+				<div class="terms-header">
+					<h2>Terms of Use</h2>
+					<button
+						type="button"
+						class="terms-close"
+						id="termsClose"
+						aria-label="Close"
+					>
+						✕
+					</button>
+				</div>
+				<div class="terms-body">
+					<p
+						style="
+							color: var(--muted);
+							font-size: 0.75rem;
+							margin-bottom: 1.25rem;
+						"
+					>
+						Last updated: August 14, 2026
+					</p>
+
+					<h3>1. Acceptance of Terms</h3>
+					<p>
+						By joining the Maren waitlist or using meetmaren.app ("Service"),
+						you agree to these Terms of Use. If you do not agree, do not use the
+						Service. Maren is operated by Maren ("Company," "we," "us"), a
+						limited liability company based in Charlotte, North Carolina.
+					</p>
+
+					<h3>2. Eligibility</h3>
+					<p>
+						You must be at least 18 years old to use Maren. By joining the
+						waitlist or creating an account, you represent that you are 18 or
+						older and have the legal capacity to enter into these Terms.
+					</p>
+
+					<h3>3. Service Description</h3>
+					<p>
+						Maren is an AI-powered dating service that uses conversational
+						profiling and machine learning to introduce users to potential
+						matches. The Service currently operates as a waitlist. When
+						launched, Maren will introduce you to one person at a time based on
+						compatibility analysis. Maren does not guarantee any particular
+						outcome, including romantic connections, dates, or relationships.
+					</p>
+
+					<h3>4. Waitlist &amp; Early Access</h3>
+					<p>
+						Joining the waitlist does not guarantee access to the Service. Early
+						access is offered at our discretion based on waitlist position,
+						referral activity, location, and other factors. We reserve the right
+						to modify, pause, or discontinue the waitlist at any time.
+					</p>
+
+					<h3>5. Your Account &amp; Data</h3>
+					<p>
+						When you join the waitlist, you provide us with your email address
+						and optionally your phone number and city. You agree to provide
+						accurate information. We use this data to:
+					</p>
+					<ul>
+						<li>Manage your waitlist position and communicate updates</li>
+						<li>
+							Send you one SMS notification when access is available (if you
+							provide a phone number)
+						</li>
+						<li>Improve and develop the Service</li>
+						<li>Track anonymous, aggregated usage analytics</li>
+					</ul>
+					<p>
+						We do not sell your personal data to third parties. We do not send
+						marketing emails or SMS newsletters unless you explicitly opt in.
+					</p>
+
+					<h3>6. AI-Powered Matching</h3>
+					<p>
+						Maren uses artificial intelligence to analyze conversational input
+						and generate match recommendations. By using the Service, you
+						acknowledge that:
+					</p>
+					<ul>
+						<li>
+							Match recommendations are generated by AI and are not guarantees
+							of compatibility
+						</li>
+						<li>
+							Your conversational input may be processed by AI systems to
+							improve matching quality
+						</li>
+						<li>
+							AI-generated match explanations are algorithmic assessments, not
+							professional advice
+						</li>
+						<li>
+							You are responsible for your own decisions regarding any
+							introductions made through the Service
+						</li>
+					</ul>
+
+					<h3>7. User Conduct</h3>
+					<p>You agree not to:</p>
+					<ul>
+						<li>
+							Provide false or misleading information during signup or profiling
+						</li>
+						<li>
+							Use the Service for any unlawful purpose or to harass, abuse, or
+							harm others
+						</li>
+						<li>
+							Attempt to manipulate the waitlist position, referral system, or
+							matching algorithm
+						</li>
+						<li>
+							Create multiple accounts or use automated tools to interact with
+							the Service
+						</li>
+						<li>
+							Reverse-engineer, decompile, or attempt to extract the source code
+							or algorithms of the Service
+						</li>
+					</ul>
+					<p>
+						We reserve the right to remove users who violate these terms without
+						notice.
+					</p>
+
+					<h3>8. Referral Program</h3>
+					<p>
+						The waitlist referral program allows you to share a unique link.
+						When someone joins through your link, your waitlist position may be
+						adjusted. Referral benefits (including priority access, early
+						invites, and founding member status) are offered at our discretion
+						and may be modified or discontinued at any time. Fraudulent or
+						manipulated referrals may result in removal from the waitlist.
+					</p>
+
+					<h3>9. Intellectual Property</h3>
+					<p>
+						All content, design, branding, algorithms, and technology associated
+						with Maren are owned by Maren. You may not copy, modify, distribute,
+						or create derivative works from any part of the Service without
+						written permission. "Maren" and the Maren logo are trademarks of
+						Maren.
+					</p>
+
+					<h3>10. Disclaimers</h3>
+					<p>
+						The Service is provided "as is" and "as available." We make no
+						warranties, express or implied, regarding the Service's reliability,
+						accuracy, or fitness for a particular purpose. We do not conduct
+						background checks on users. You are solely responsible for your
+						safety when meeting anyone introduced through the Service.
+					</p>
+
+					<h3>11. Limitation of Liability</h3>
+					<p>
+						To the maximum extent permitted by law, Maren shall not be liable
+						for any indirect, incidental, special, consequential, or punitive
+						damages arising from your use of or inability to use the Service,
+						including but not limited to damages from personal interactions with
+						other users, emotional distress, or loss of data.
+					</p>
+
+					<h3>12. Termination</h3>
+					<p>
+						We may suspend or terminate your access to the Service at any time,
+						for any reason, without prior notice.
+					</p>
+
+					<h3>13. Changes to These Terms</h3>
+					<p>
+						We may update these Terms at any time. If we make material changes,
+						we will notify you via the email address associated with your
+						waitlist registration. Continued use of the Service after changes
+						constitutes acceptance of the updated Terms.
+					</p>
+
+					<h3>14. Governing Law</h3>
+					<p>
+						These Terms are governed by the laws of the State of North Carolina,
+						without regard to conflict of law principles. Any disputes arising
+						under these Terms shall be resolved in the courts of Mecklenburg
+						County, North Carolina.
+					</p>
+				</div>
+				<div class="terms-footer">
+					<button type="button" class="terms-accept" id="termsAccept">
+						I understand
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function () {
+				var SUPABASE_URL = "https://yeayejlzcrykgfmnigxy.supabase.co";
+				var SUPABASE_KEY = "sb_publishable_bc0h8u3Rspkke0wc5izmGA_6F2W_Hdx";
+
+				function rpc(fn, args, opts) {
+					return fetch(SUPABASE_URL + "/rest/v1/rpc/" + fn, {
+						method: "POST",
+						headers: {
+							apikey: SUPABASE_KEY,
+							Authorization: "Bearer " + SUPABASE_KEY,
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(args || {}),
+						keepalive: !!(opts && opts.keepalive),
+					}).then(function (r) {
+						return r.text().then(function (t) {
+							var body = null;
+							try {
+								body = t ? JSON.parse(t) : null;
+							} catch (e) {}
+							if (!r.ok) {
+								throw new Error(
+									(body && (body.message || body.hint)) ||
+										"Something went wrong. Please try again.",
+								);
+							}
+							return body;
+						});
+					});
+				}
+
+				function lsGet(k) {
+					try { return localStorage.getItem(k); } catch (e) { return null; }
+				}
+				function lsSet(k, v) {
+					try { localStorage.setItem(k, v); } catch (e) {}
+				}
+				function lsDel(k) {
+					try { localStorage.removeItem(k); } catch (e) {}
+				}
+				function ssGet(k) {
+					try { return sessionStorage.getItem(k); } catch (e) { return null; }
+				}
+				function ssSet(k, v) {
+					try { sessionStorage.setItem(k, v); } catch (e) {}
+				}
+
+				function uuid() {
+					if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+					if (window.crypto && crypto.getRandomValues) {
+						var b = crypto.getRandomValues(new Uint8Array(16));
+						b[6] = (b[6] & 0x0f) | 0x40;
+						b[8] = (b[8] & 0x3f) | 0x80;
+						var h = [];
+						for (var i = 0; i < 16; i++)
+							h.push((b[i] + 0x100).toString(16).slice(1));
+						return (
+							h.slice(0, 4).join("") + "-" + h.slice(4, 6).join("") + "-" +
+							h.slice(6, 8).join("") + "-" + h.slice(8, 10).join("") + "-" +
+							h.slice(10, 16).join("")
+						);
+					}
+					return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+						var r = (Math.random() * 16) | 0;
+						return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+					});
+				}
+
+				var SESSION_KEY = "maren_session";
+				var session = null;
+				try { session = JSON.parse(lsGet(SESSION_KEY) || "null"); } catch (e) {}
+
+				function saveSession(p) {
+					if (!p || !p.token) return;
+					session = { token: p.token, referral_code: p.referral_code, position: p.position };
+					lsSet(SESSION_KEY, JSON.stringify(session));
+				}
+
+				var visitorId = lsGet("maren_vid");
+				if (!visitorId) { visitorId = uuid(); lsSet("maren_vid", visitorId); }
+				var sessionId = ssGet("maren_sid");
+				if (!sessionId) { sessionId = uuid(); ssSet("maren_sid", sessionId); }
+
+				var params = new URLSearchParams(location.search);
+				var refCode = ssGet("maren_ref") || params.get("ref") || "";
+				if (refCode) ssSet("maren_ref", refCode);
+
+				var ctx = null;
+				try { ctx = JSON.parse(ssGet("maren_ctx") || "null"); } catch (e) {}
+				if (!ctx) {
+					ctx = {
+						path: location.pathname, referrer: document.referrer || "",
+						utm_source: params.get("utm_source") || "",
+						utm_medium: params.get("utm_medium") || "",
+						utm_campaign: params.get("utm_campaign") || "",
+						ref: refCode,
+					};
+					ssSet("maren_ctx", JSON.stringify(ctx));
+				}
+
+				var queue = [], flushTimer = null, t0 = Date.now();
+
+				function track(name, props) {
+					var p = props || {};
+					p.ms = Date.now() - t0;
+					queue.push({ n: name, p: p });
+					if (queue.length >= 25) flush();
+					else if (!flushTimer) flushTimer = setTimeout(flush, 5000);
+				}
+
+				function flush(opts) {
+					if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
+					if (!queue.length) return;
+					var batch = queue.splice(0, 50);
+					rpc("track", {
+						p_visitor: visitorId, p_session: sessionId,
+						p_events: batch, p_ctx: ctx,
+					}, opts).catch(function () {});
+				}
+
+				var visAccum = 0;
+				var visStart = document.visibilityState === "visible" ? Date.now() : 0;
+				document.addEventListener("visibilitychange", function () {
+					if (document.visibilityState === "hidden") {
+						if (visStart) { visAccum += Date.now() - visStart; visStart = 0; }
+					} else if (!visStart) { visStart = Date.now(); }
+				});
+
+				var exitSent = false, maxStep = 1, restoring = false;
+				function finalFlush() {
+					if (!exitSent) {
+						exitSent = true;
+						var ms = visAccum + (visStart ? Date.now() - visStart : 0);
+						track("exit", { step: maxStep, seconds: Math.round(ms / 1000) });
+					}
+					flush({ keepalive: true });
+				}
+				window.addEventListener("pagehide", finalFlush);
+				document.addEventListener("visibilitychange", function () {
+					if (document.visibilityState === "hidden") finalFlush();
+				});
+
+				track("page_view", {});
+
+				function reveal(el) {
+					el.classList.add("v");
+					var name = el.getAttribute("data-sec");
+					if (name) track("section_view", { name: name });
+				}
+				if ("IntersectionObserver" in window) {
+					var obs = new IntersectionObserver(function (entries) {
+						for (var i = 0; i < entries.length; i++) {
+							if (entries[i].isIntersecting) { reveal(entries[i].target); obs.unobserve(entries[i].target); }
+						}
+					}, { threshold: 0.1 });
+					var rvs = document.querySelectorAll(".rv");
+					for (var i = 0; i < rvs.length; i++) obs.observe(rvs[i]);
+				} else {
+					var rvs = document.querySelectorAll(".rv");
+					for (var i = 0; i < rvs.length; i++) rvs[i].classList.add("v");
+				}
+
+				var TOTAL_CAP = 5000;
+				var MIN_SHOW = 25;
+				var signed = false;
+
+				var emailIn = document.getElementById("emailIn");
+				var cityIn = document.getElementById("cityIn");
+				var joinBtn = document.getElementById("joinBtn");
+				var msg = document.getElementById("msg");
+
+				var totalEl = document.getElementById("totalCount");
+				var barFill = document.getElementById("barFill");
+				var totalEl2 = document.getElementById("totalCount2");
+				var barFill2 = document.getElementById("barFill2");
+				var scarcity1 = document.getElementById("scarcity1");
+				var scarcity2 = document.getElementById("scarcity2");
+				var velBadge = document.getElementById("velocityBadge");
+				var velText = document.getElementById("velocityText");
+
+				var posBadge = document.getElementById("posBadge");
+				var shareLink = document.getElementById("shareLink");
+				var refCountEl = document.getElementById("refCount");
+
+				var termsCb1 = document.getElementById("termsCb1");
+				var termsCb2 = document.getElementById("termsCb2");
+				var termsRow1 = document.getElementById("termsRow1");
+				var termsRow2 = document.getElementById("termsRow2");
+				var termsOverlay = document.getElementById("termsOverlay");
+				var termsClose = document.getElementById("termsClose");
+				var termsAccept = document.getElementById("termsAccept");
+
+				function openTerms(e) {
+					if (e) e.preventDefault();
+					termsOverlay.classList.add("open");
+					document.body.style.overflow = "hidden";
+					track("terms_open", {});
+				}
+				function closeTerms() {
+					termsOverlay.classList.remove("open");
+					document.body.style.overflow = "";
+				}
+
+				var termsLinks = document.querySelectorAll("[data-terms]");
+				for (var tl = 0; tl < termsLinks.length; tl++) {
+					termsLinks[tl].addEventListener("click", openTerms);
+				}
+				termsClose.addEventListener("click", closeTerms);
+				termsAccept.addEventListener("click", function () {
+					closeTerms();
+					if (termsCb1 && !termsCb1.checked) termsCb1.checked = true;
+					if (termsCb2 && !termsCb2.checked) termsCb2.checked = true;
+				});
+				termsOverlay.addEventListener("click", function (e) {
+					if (e.target === termsOverlay) closeTerms();
+				});
+				document.addEventListener("keydown", function (e) {
+					if (e.key === "Escape" && termsOverlay.classList.contains("open")) closeTerms();
+				});
+
+				function checkTerms(cb, row, msgEl) {
+					if (cb.checked) return true;
+					row.classList.remove("shake");
+					void row.offsetWidth;
+					row.classList.add("shake");
+					showErr(msgEl, "Please agree to the Terms of Use.");
+					track("terms_required", {});
+					return false;
+				}
+
+				termsCb1.addEventListener("change", function () { if (termsCb1.checked) clearErr(msg); });
+				termsCb2.addEventListener("change", function () { if (termsCb2.checked) clearErr(msg2); });
+
+				var steps = [
+					document.getElementById("step1"),
+					document.getElementById("step2"),
+					document.getElementById("step3"),
+					document.getElementById("step4"),
+				];
+				var progressDots = document.querySelectorAll("#stepProgress .sp-dot");
+
+				var emailIn2 = document.getElementById("emailIn2");
+				var joinBtn2 = document.getElementById("joinBtn2");
+				var msg2 = document.getElementById("msg2");
+				var formLive2 = document.getElementById("formLive2");
+				var postArea2 = document.getElementById("postArea2");
+
+				var stickyBar = document.getElementById("stickyBar");
+				var stickyEmail = document.getElementById("stickyEmail");
+				var stickyBtn = document.getElementById("stickyBtn");
+
+				function renderStats(s) {
+					if (!s) return;
+					var total = s.total | 0, week = s.week | 0, prev = s.prev_week | 0;
+
+					if (total >= MIN_SHOW) {
+						var f = total.toLocaleString();
+						totalEl.textContent = f;
+						totalEl2.textContent = f;
+						scarcity1.hidden = false;
+						scarcity2.hidden = false;
+						var pct = Math.min((total / TOTAL_CAP) * 100, 100);
+						setTimeout(function () {
+							barFill.style.width = pct + "%";
+							barFill2.style.width = pct + "%";
+						}, 100);
+					}
+
+					var ratio = prev > 0 ? week / prev : 0;
+					if (ratio >= 1.2) {
+						velText.textContent = "Filling " + Math.round(ratio * 10) / 10 + "\u00d7 faster than last week";
+						velBadge.hidden = false;
+					} else {
+						velBadge.hidden = true;
+					}
+				}
+
+				function loadStats() { rpc("waitlist_stats").then(renderStats).catch(function () {}); }
+				loadStats();
+				setInterval(loadStats, 60000);
+
+				function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()); }
+				function showErr(el, t) { el.textContent = t; el.className = "form-msg err"; }
+				function clearErr(el) { el.innerHTML = "&nbsp;"; el.className = "form-msg"; }
+				emailIn.addEventListener("input", function () { clearErr(msg); });
+				emailIn2.addEventListener("input", function () { clearErr(msg2); });
+
+				var focusSent = false;
+				var focusables = [emailIn, cityIn, emailIn2, stickyEmail];
+				for (var fi = 0; fi < focusables.length; fi++) {
+					focusables[fi].addEventListener("focus", function () {
+						if (focusSent) return;
+						focusSent = true;
+						track("form_focus", {});
+					});
+				}
+
+				function goToStep(n) {
+					for (var i = 0; i < steps.length; i++) {
+						steps[i].classList.remove("active");
+						steps[i].classList.remove("step-enter");
+					}
+					steps[n - 1].classList.add("active");
+					steps[n - 1].classList.add("step-enter");
+
+					for (var i = 0; i < progressDots.length; i++) {
+						var dotStep = parseInt(progressDots[i].getAttribute("data-step"));
+						progressDots[i].className = "sp-dot";
+						if (dotStep < n) progressDots[i].classList.add("done");
+						else if (dotStep === n && n <= 3) progressDots[i].classList.add("current");
+						else if (n === 4) progressDots[i].classList.add("done");
+					}
+
+					document.getElementById("stepProgress").style.display = n === 4 ? "none" : "flex";
+
+					if (n > maxStep) maxStep = n;
+					if (!restoring) track("step_view", { n: n });
+				}
+
+				function submitEmail(btn, label, msgEl, email, city, source, onDone, onError) {
+					btn.disabled = true;
+					btn.textContent = "...";
+					rpc("join_waitlist", {
+						p_email: email, p_city: city || null,
+						p_ref: refCode || null, p_source: source, p_visitor: visitorId,
+					})
+						.then(function (p) {
+							saveSession(p);
+							flush();
+							btn.disabled = false;
+							btn.textContent = label;
+							onDone(p);
+						})
+						.catch(function (err) {
+							btn.disabled = false;
+							btn.textContent = label;
+							showErr(msgEl, err.message || "Something went wrong. Please try again.");
+							if (onError) onError();
+						});
+				}
+
+				joinBtn.addEventListener("click", function () {
+					var email = emailIn.value.trim();
+					if (!email) { showErr(msg, "Enter your email."); emailIn.focus(); track("email_invalid", { reason: "empty", source: "hero" }); return; }
+					if (!validEmail(email)) { showErr(msg, "That doesn't look right."); emailIn.focus(); track("email_invalid", { reason: "format", source: "hero" }); return; }
+					if (!checkTerms(termsCb1, termsRow1, msg)) return;
+					clearErr(msg);
+					track("email_valid", { source: "hero" });
+					submitEmail(joinBtn, "Get early access", msg, email, cityIn.value.trim(), "hero", function () { goToStep(2); });
+				});
+				emailIn.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); joinBtn.click(); } });
+				cityIn.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); joinBtn.click(); } });
+
+				var chips = document.querySelectorAll("#qChips .q-chip");
+				var qCustom = document.getElementById("qCustom");
+				var selectedChip = "";
+
+				for (var i = 0; i < chips.length; i++) {
+					chips[i].addEventListener("click", function () {
+						for (var j = 0; j < chips.length; j++) chips[j].classList.remove("selected");
+						this.classList.add("selected");
+						selectedChip = this.getAttribute("data-val");
+						track("chip_select", { value: selectedChip });
+					});
+				}
+
+				document.getElementById("step2Btn").addEventListener("click", function () {
+					var custom = qCustom.value.trim();
+					var answer = custom || selectedChip;
+					track("step_continue", { n: 2, has_custom_text: !!custom, answered: !!answer });
+					if (session && session.token && answer) {
+						rpc("update_waitlist", { p_token: session.token, p_frustration: answer }).catch(function () {});
+					}
+					goToStep(3);
+				});
+
+				var step3Btn = document.getElementById("step3Btn");
+				var skipPhone = document.getElementById("skipPhone");
+				var phoneIn = document.getElementById("phoneIn");
+
+				step3Btn.addEventListener("click", function () { completeSignup(phoneIn.value.trim(), false); });
+				skipPhone.addEventListener("click", function () { completeSignup("", true); });
+				phoneIn.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); step3Btn.click(); } });
+
+				function completeSignup(phone, viaSkip) {
+					track(viaSkip ? "phone_skip" : "phone_submit", {});
+
+					if (!session || !session.token) {
+						goToStep(1);
+						showErr(msg, "Please enter your email to continue.");
+						return;
+					}
+
+					var label = "Get early access";
+					step3Btn.disabled = true;
+					skipPhone.disabled = true;
+					step3Btn.textContent = "...";
+
+					function finish(p) {
+						step3Btn.disabled = false;
+						skipPhone.disabled = false;
+						step3Btn.textContent = label;
+						showSuccess(p, true, "hero");
+					}
+					rpc("update_waitlist", { p_token: session.token, p_phone: phone || null })
+						.then(function (p) { saveSession(p); finish(p); })
+						.catch(function () { finish(session); });
+				}
+
+				function shareUrl(code) {
+					var base = "https://meetmaren.app/";
+					if (location.protocol === "http:" || location.protocol === "https:") {
+						base = location.origin + location.pathname.replace(/[^/]*$/, "");
+					}
+					return base + "?ref=" + (code || "");
+				}
+
+				function showSuccess(p, isNew, source) {
+					signed = true;
+					p = p || {};
+
+					posBadge.textContent = p.position
+						? "You're #" + Number(p.position).toLocaleString() + " on the list"
+						: "You're on the list";
+					shareLink.value = shareUrl(p.referral_code);
+					updateShareBtns();
+
+					var n = p.referrals | 0;
+					if (n > 0) {
+						refCountEl.textContent = n + (n === 1 ? " friend has" : " friends have") + " joined \u2014 you moved up " + (n * 25).toLocaleString() + " spots";
+						refCountEl.hidden = false;
+					} else {
+						refCountEl.hidden = true;
+					}
+
+					goToStep(4);
+					formLive2.style.display = "none";
+					if (postArea2) postArea2.classList.add("on");
+					stickyBar.classList.remove("show");
+					stickyBar.classList.add("hide-final");
+
+					if (isNew) { track("signup_complete", { source: source || "hero" }); flush(); }
+				}
+
+				if (session && session.token) {
+					rpc("update_waitlist", { p_token: session.token })
+						.then(function (p) {
+							saveSession(p);
+							restoring = true;
+							showSuccess(p, false);
+							restoring = false;
+						})
+						.catch(function () {
+							lsDel(SESSION_KEY);
+							session = null;
+						});
+				}
+
+				joinBtn2.addEventListener("click", function () {
+					var email = emailIn2.value.trim();
+					if (!email) { showErr(msg2, "Enter your email."); emailIn2.focus(); track("email_invalid", { reason: "empty", source: "bottom" }); return; }
+					if (!validEmail(email)) { showErr(msg2, "That doesn't look right."); emailIn2.focus(); track("email_invalid", { reason: "format", source: "bottom" }); return; }
+					if (!checkTerms(termsCb2, termsRow2, msg2)) return;
+					clearErr(msg2);
+					track("email_valid", { source: "bottom" });
+					submitEmail(joinBtn2, "Get early access", msg2, email, "", "bottom", function (p) {
+						showSuccess(p, true, "bottom");
+						document.getElementById("heroSection").scrollIntoView({ behavior: "smooth", block: "start" });
+					});
+				});
+				emailIn2.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); joinBtn2.click(); } });
+
+				stickyBtn.addEventListener("click", function () {
+					var email = stickyEmail.value.trim();
+					if (!email || !validEmail(email)) {
+						emailIn.scrollIntoView({ behavior: "smooth", block: "center" });
+						setTimeout(function () { emailIn.focus(); }, 500);
+						track("email_invalid", { reason: "format", source: "sticky" });
+						return;
+					}
+					track("email_valid", { source: "sticky" });
+					submitEmail(stickyBtn, "Get early access", msg, email, "", "sticky", function () {
+						goToStep(2);
+						document.getElementById("heroSection").scrollIntoView({ behavior: "smooth", block: "start" });
+						stickyBar.classList.remove("show");
+						stickyBar.classList.add("hide-final");
+					}, function () {
+						document.getElementById("heroSection").scrollIntoView({ behavior: "smooth", block: "start" });
+					});
+				});
+				stickyEmail.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); stickyBtn.click(); } });
+
+				var copyBtn = document.getElementById("copyBtn");
+				copyBtn.addEventListener("click", function () {
+					var val = shareLink.value;
+					track("share_copy", {});
+					if (navigator.clipboard && navigator.clipboard.writeText) {
+						navigator.clipboard.writeText(val).then(function () { showCopied(); }, function () { fallbackCopy(); });
+					} else { fallbackCopy(); }
+				});
+				function fallbackCopy() { shareLink.select(); try { document.execCommand("copy"); } catch (e) {} showCopied(); }
+				function showCopied() {
+					copyBtn.textContent = "Copied";
+					copyBtn.classList.add("copied");
+					setTimeout(function () { copyBtn.textContent = "Copy"; copyBtn.classList.remove("copied"); }, 2000);
+				}
+
+				var shareTextBtn = document.getElementById("shareText");
+				var shareXBtn = document.getElementById("shareX");
+				var shareWABtn = document.getElementById("shareWA");
+
+				function updateShareBtns() {
+					var url = shareLink.value;
+					var msg = "I just joined the waitlist for Maren \u2014 it finds someone worth your time instead of making you swipe. Check it out: " + url;
+					var xMsg = "Just joined the waitlist for @meetmaren \u2014 it finds your person instead of handing you a deck of faces. " + url;
+					shareTextBtn.href = "sms:?&body=" + encodeURIComponent(msg);
+					shareXBtn.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(xMsg);
+					shareWABtn.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+				}
+
+				var qTa = document.getElementById("qTa");
+				var qSend = document.getElementById("qSend");
+				var qSkip = document.getElementById("qSkip");
+				var qForm = document.getElementById("qForm");
+				var qThanks = document.getElementById("qThanks");
+				var thxMsg = document.getElementById("thxMsg");
+
+				qSend.addEventListener("click", function () {
+					var a = qTa.value.trim();
+					if (!a) { qTa.focus(); return; }
+					qSend.disabled = true;
+					qSend.textContent = "...";
+					track("dream_send", { len: a.length });
+					function done() { qForm.classList.add("off"); qThanks.classList.add("on"); }
+					if (session && session.token) {
+						rpc("update_waitlist", { p_token: session.token, p_dream_feature: a }).then(done, done);
+					} else { done(); }
+				});
+				qSkip.addEventListener("click", function () {
+					track("dream_skip", {});
+					thxMsg.textContent = "No worries. We'll be in touch.";
+					qForm.classList.add("off");
+					qThanks.classList.add("on");
+				});
+
+				var heroEl = document.getElementById("step1");
+				var stickyVisible = false;
+
+				function checkSticky() {
+					if (signed) return;
+					var heroRect = heroEl.getBoundingClientRect();
+					var heroGone = heroRect.bottom < 0;
+					var btmRect = formLive2.getBoundingClientRect();
+					var btmVisible = btmRect.top < window.innerHeight;
+					var shouldShow = heroGone && !btmVisible;
+					if (shouldShow && !stickyVisible) { stickyBar.classList.add("show"); stickyVisible = true; }
+					else if (!shouldShow && stickyVisible) { stickyBar.classList.remove("show"); stickyVisible = false; }
+				}
+
+				var depths = [25, 50, 75, 100], depthSent = {};
+				function checkDepth() {
+					var doc = document.documentElement;
+					var scrollable = doc.scrollHeight - window.innerHeight;
+					if (scrollable <= 0) return;
+					var pct = ((window.pageYOffset || doc.scrollTop) / scrollable) * 100;
+					for (var i = 0; i < depths.length; i++) {
+						if (pct >= depths[i] && !depthSent[depths[i]]) {
+							depthSent[depths[i]] = true;
+							track("scroll_depth", { pct: depths[i] });
+						}
+					}
+				}
+
+				var scrollTick = false;
+				window.addEventListener("scroll", function () {
+					if (!scrollTick) {
+						window.requestAnimationFrame(function () { checkSticky(); checkDepth(); scrollTick = false; });
+						scrollTick = true;
+					}
+				}, { passive: true });
+
+				var carTrack = document.getElementById("phoneTrack");
+				var dots = document.querySelectorAll("#peekDots .dot");
+				if (carTrack && dots.length) {
+					var ticking = false, lastIdx = 0;
+					carTrack.addEventListener("scroll", function () {
+						if (!ticking) {
+							window.requestAnimationFrame(function () {
+								var sl = carTrack.scrollLeft;
+								var cw = carTrack.querySelector(".device").offsetWidth + 16;
+								var idx = Math.max(0, Math.min(Math.round(sl / cw), dots.length - 1));
+								for (var i = 0; i < dots.length; i++) dots[i].classList.toggle("active", i === idx);
+								if (idx !== lastIdx) { lastIdx = idx; track("carousel_swipe", { idx: idx }); }
+								ticking = false;
+							});
+							ticking = true;
+						}
+					}, { passive: true });
+				}
+			})();
+		</script>
+	</body>
+</html>
